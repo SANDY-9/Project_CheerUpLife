@@ -1,2 +1,2 @@
-# Project_JobSeekingLife
-구직라이프
+# Project_CheerUpLife
+구직라이프(취Up생활)
