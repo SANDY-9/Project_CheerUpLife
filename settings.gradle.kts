@@ -21,4 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "CheerUpLife"
 include(":app")
- 
+include(":core:designsystem")
