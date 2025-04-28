@@ -3,12 +3,10 @@ package com.cheeruplife.core.designsystem.component
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.text.KeyboardActionScope
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -32,7 +30,6 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.cheeruplife.core.designsystem.common.Dimens
 import com.cheeruplife.core.designsystem.common.Margin
 import com.cheeruplife.core.designsystem.extension.addFocusCleaner
@@ -52,6 +49,17 @@ fun LifeSearchTextField(
     modifier: Modifier = Modifier,
 ) {
     val context = LocalContext.current
+    val searchEvent: (KeyboardActionScope.() -> Unit) = remember {
+        {
+            if(query.isNotBlank()) {
+                onSearch()
+                focusManager.clearFocus()
+            }
+            else {
+                context.showToast(QUERY_EMPTY_MESSAGE)
+            }
+        }
+    }
     TextField(
         modifier = modifier
             .fillMaxSize()
@@ -104,15 +112,7 @@ fun LifeSearchTextField(
             imeAction = ImeAction.Search,
         ),
         keyboardActions = KeyboardActions(
-            onSearch = {
-                if(query.isNotBlank()) {
-                    onSearch()
-                    focusManager.clearFocus()
-                }
-                else {
-                    context.showToast(QUERY_EMPTY_MESSAGE)
-                }
-            }
+            onSearch = searchEvent,
         ),
     )
 }
@@ -135,8 +135,8 @@ private fun PreviewTextInputField() {
                 query = input,
                 placeholder = "검색어를 입력해주세요",
                 focusManager = focusManager,
-                onInputChange = {
-                    input = it
+                onInputChange = remember {
+                    { query -> input = query }
                 },
                 onSearch = {},
             )

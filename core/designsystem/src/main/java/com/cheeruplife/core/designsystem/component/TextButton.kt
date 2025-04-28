@@ -1,5 +1,6 @@
 package com.cheeruplife.core.designsystem.component
 
+import androidx.compose.foundation.gestures.PressGestureScope
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -10,6 +11,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.font.FontWeight
@@ -28,16 +30,20 @@ fun LifeTextButton(
     modifier: Modifier = Modifier,
 ) {
     var color: Color by remember { mutableStateOf(LifeRed) }
+    val pressEvent: PressGestureScope.(Offset) -> Unit = remember {
+        { color = LifeGray700 }
+    }
+    val tapEvent = remember {
+        { _: Offset ->
+            color = LifeRed
+            onClick()
+        }
+    }
     Box(
         modifier = modifier.pointerInput(Unit) {
             detectTapGestures(
-                onPress = {
-                    color = LifeGray700
-                },
-                onTap = {
-                    color = LifeRed
-                    onClick()
-                }
+                onPress = pressEvent,
+                onTap = tapEvent,
             )
         }
         ,
@@ -60,8 +66,10 @@ private fun PreviewTextButton() {
         Column {
             LifeTextButton(
                 title = test,
-                onClick = {
-                    test = if(test != "테스트 입니다") "테스트 입니다" else "전체보기"
+                onClick = remember {
+                    {
+                        test = if(test != "테스트 입니다") "테스트 입니다" else "전체보기"
+                    }
                 }
             )
             Margin(height = Dimens.Margin8)

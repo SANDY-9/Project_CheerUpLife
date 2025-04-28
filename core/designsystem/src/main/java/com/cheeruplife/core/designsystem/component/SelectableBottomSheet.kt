@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -13,12 +14,14 @@ import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.cheeruplife.core.designsystem.common.Dimens
 import com.cheeruplife.core.designsystem.common.Margin
 import com.cheeruplife.core.designsystem.theme.CheerUpLifeTheme
@@ -36,12 +39,35 @@ fun LifeSelectableBottomSheet(
         skipPartiallyExpanded = true,
     )
     var openBottomSheet by rememberSaveable { mutableStateOf(true) }
+    val dismissRequest = remember {
+        { openBottomSheet = false }
+    }
     val scope = rememberCoroutineScope()
+    val completeEvent: () -> Unit = remember {
+        {
+            scope.launch {
+                bottomSheetState.hide()
+            }.invokeOnCompletion {
+                dismissRequest()
+                onComplete()
+            }
+        }
+    }
+    Box(
+        modifier = modifier.fillMaxSize().padding(top = 200.dp)
+    ) {
+        LifeButton(
+            title = "바텀시트 테스트",
+            onClick = {
+                openBottomSheet = !openBottomSheet
+            }
+        )
+    }
     if(openBottomSheet) {
         ModalBottomSheet(
             sheetState = bottomSheetState,
             containerColor = Color.White,
-            onDismissRequest = { openBottomSheet = false },
+            onDismissRequest = dismissRequest,
         ) {
             Column(
                 modifier = modifier.fillMaxWidth().padding(
@@ -65,14 +91,7 @@ fun LifeSelectableBottomSheet(
                     LifeButton(
                         modifier = modifier.fillMaxWidth(),
                         title = "적용하기",
-                        onClick = {
-                            scope.launch {
-                                bottomSheetState.hide()
-                            }.invokeOnCompletion {
-                                openBottomSheet = false
-                                onComplete()
-                            }
-                        },
+                        onClick = completeEvent,
                     )
                 }
             }

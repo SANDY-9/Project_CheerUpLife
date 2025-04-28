@@ -16,6 +16,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -104,45 +105,41 @@ fun LifeOutlineDropDownButton(
 fun LifeOutlineClearButton(
     title: String,
     onClick: () -> Unit,
-    onClear: (Boolean) -> Unit,
+    onClear: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    var visible by rememberSaveable { mutableStateOf(true) }
-    if(visible) {
-        OutlinedButton(
-            modifier = modifier.defaultMinSize(
-                minHeight = Dimens.Size1,
-                minWidth = Dimens.Size1,
+    OutlinedButton(
+        modifier = modifier.defaultMinSize(
+            minHeight = Dimens.Size1,
+            minWidth = Dimens.Size1,
+        ),
+        onClick = onClick,
+        border = BorderStroke(
+            width = Dimens.Size1,
+            color = LifeGray400,
+        ),
+        contentPadding = PaddingValues(
+            vertical = Dimens.Margin4,
+            horizontal = Dimens.Margin12,
+        )
+    ) {
+        Text(
+            text = title,
+            style = Typography.bodyMedium.copy(
+                color = LifeGray,
+                fontWeight = FontWeight.Medium,
             ),
-            onClick = onClick,
-            border = BorderStroke(
-                width = Dimens.Size1,
-                color = LifeGray400,
-            ),
-            contentPadding = PaddingValues(
-                vertical = Dimens.Margin4,
-                horizontal = Dimens.Margin12,
-            )
-        ) {
-            Text(
-                text = title,
-                style = Typography.bodyMedium.copy(
-                    color = LifeGray,
-                    fontWeight = FontWeight.Medium,
+        )
+        Margin(width = Dimens.Margin2)
+        Icon(
+            modifier = modifier.size(Dimens.Size16)
+                .clickable(
+                    onClick = onClear,
                 ),
-            )
-            Margin(width = Dimens.Margin2)
-            Icon(
-                modifier = modifier.size(Dimens.Size16)
-                    .clickable{
-                        visible = false
-                        onClear(true)
-                    },
-                imageVector = Icons.Rounded.Clear,
-                contentDescription = null,
-                tint = LifeGray700,
-            )
-        }
+            imageVector = Icons.Rounded.Clear,
+            contentDescription = null,
+            tint = LifeGray700,
+        )
     }
 }
 
