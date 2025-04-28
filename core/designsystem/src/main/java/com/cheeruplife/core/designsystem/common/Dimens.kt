@@ -7,10 +7,11 @@ object Dimens {
     // margin
     val Margin0 = 0.dp
     val Margin2 = 2.dp
+    val Margin3 = 3.dp
     val Margin4 = 4.dp
     val Margin8 = 8.dp
     val Margin10 = 10.dp
-    val Margin12 = 8.dp
+    val Margin12 = 12.dp
     val Margin16 = 16.dp
     val Margin20 = 20.dp
     val Margin24 = 16.dp
