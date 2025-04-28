@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
+import com.cheeruplife.feature.home.navigation.homeScreen
 
 @Composable
 internal fun CheerUpLifeNavGraph(
@@ -17,6 +17,6 @@ internal fun CheerUpLifeNavGraph(
         navController = navController,
         startDestination = startDestination
     ) {
-        composable<StartRoute> {  }
+        homeScreen()
     }
 }

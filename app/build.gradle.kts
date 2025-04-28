@@ -45,6 +45,7 @@ android {
 dependencies {
 
     implementation(project(":core:designsystem"))
+    implementation(project(":feature:home"))
 
     implementation(libs.bundles.androidx)
     implementation(platform(libs.androidx.compose.bom))

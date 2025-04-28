@@ -5,8 +5,8 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import com.cheeruplife.core.designsystem.theme.CheerUpLifeTheme
+import com.cheeruplife.feature.home.navigation.HomeRoute
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.serialization.Serializable
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -18,11 +18,9 @@ class MainActivity : ComponentActivity() {
             CheerUpLifeTheme {
                 CheerUpLifeMainApp(
                     appState = cheerUpLifeAppState,
-                    startDestination = StartRoute,
+                    startDestination = HomeRoute,
                 )
             }
         }
     }
 }
-
-@Serializable object StartRoute
