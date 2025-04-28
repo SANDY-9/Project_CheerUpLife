@@ -15,8 +15,14 @@ fun NavController.navigateToHome(
     navigate(route = HomeRoute, navOptions)
 }
 
-fun NavGraphBuilder.homeScreen() {
+fun NavGraphBuilder.homeScreen(
+    onClickNotification: () -> Unit = {},
+    onClickCalendar: () -> Unit = {},
+) {
     composable<HomeRoute> {
-        HomeRoute()
+        HomeRoute(
+            onClickNotification = onClickNotification,
+            onClickCalendar = onClickCalendar,
+        )
     }
 }
