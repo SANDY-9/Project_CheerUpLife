@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import com.cheeruplife.core.designsystem.common.RoundSquare
 import com.cheeruplife.core.designsystem.theme.CheerUpLifeTheme
 import com.cheeruplife.core.designsystem.theme.Typography
 
@@ -20,6 +21,7 @@ fun LifeButton(
     Button(
         modifier = modifier,
         onClick = onClick,
+        shape = RoundSquare.Regular,
     ) {
         Text(
             text = title,

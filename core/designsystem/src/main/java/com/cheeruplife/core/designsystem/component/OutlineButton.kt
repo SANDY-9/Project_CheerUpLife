@@ -2,15 +2,11 @@ package com.cheeruplife.core.designsystem.component
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.MarqueeSpacing
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.defaultMinSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Clear
 import androidx.compose.material.icons.rounded.KeyboardArrowDown
@@ -27,14 +23,39 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.cheeruplife.core.designsystem.common.Dimens
 import com.cheeruplife.core.designsystem.common.Margin
+import com.cheeruplife.core.designsystem.common.RoundSquare
 import com.cheeruplife.core.designsystem.theme.CheerUpLifeTheme
 import com.cheeruplife.core.designsystem.theme.LifeGray
 import com.cheeruplife.core.designsystem.theme.LifeGray400
 import com.cheeruplife.core.designsystem.theme.LifeGray700
 import com.cheeruplife.core.designsystem.theme.Typography
+
+@Composable
+fun LifeOutLineButton(
+    title: String,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    OutlinedButton(
+        modifier = modifier,
+        onClick = onClick,
+        shape = RoundSquare.Regular,
+        border = BorderStroke(
+            width = Dimens.Size1,
+            color = LifeGray400,
+        ),
+    ) {
+        Text(
+            text = title,
+            style = Typography.bodyLarge.copy(
+                color = LifeGray,
+                fontWeight = FontWeight.Bold,
+            ),
+        )
+    }
+}
 
 @Composable
 fun LifeOutlineDropDownButton(
@@ -130,6 +151,11 @@ fun LifeOutlineClearButton(
 private fun PreviewOutlineButton() {
     CheerUpLifeTheme {
         Column {
+            LifeOutLineButton(
+                title = "Button 버튼타이틀",
+                onClick = {},
+            )
+            Margin(height = Dimens.Margin8)
             LifeOutlineDropDownButton(
                 title = "Button 버튼타이틀",
                 onClick = {},
