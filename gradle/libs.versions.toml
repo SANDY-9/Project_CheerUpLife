@@ -92,7 +92,6 @@ androidTest = [
 hilt = [
     "hilt-android",
     "hilt-core",
-    "hilt-compiler",
 ]
 
 [plugins]
