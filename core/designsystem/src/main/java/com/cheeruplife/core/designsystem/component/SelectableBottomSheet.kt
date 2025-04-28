@@ -53,16 +53,6 @@ fun LifeSelectableBottomSheet(
             }
         }
     }
-    Box(
-        modifier = modifier.fillMaxSize().padding(top = 200.dp)
-    ) {
-        LifeButton(
-            title = "바텀시트 테스트",
-            onClick = {
-                openBottomSheet = !openBottomSheet
-            }
-        )
-    }
     if(openBottomSheet) {
         ModalBottomSheet(
             sheetState = bottomSheetState,
