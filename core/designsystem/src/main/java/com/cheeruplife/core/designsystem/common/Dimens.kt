@@ -22,7 +22,9 @@ object Dimens {
     val Margin48 = 48.dp
 
     // cornerShape
+    val CornerShape4 = 4.dp
     val CornerShape8 = 8.dp
+    val CornerShape10 = 10.dp
     val CornerShape12 = 12.dp
     val CornerShape16 = 16.dp
 
@@ -38,5 +40,6 @@ object Dimens {
     val Size36 = 36.dp
     val Size48 = 48.dp
     val Size56 = 56.dp
+    val Size112 = 112.dp
 
 }
