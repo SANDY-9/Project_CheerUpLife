@@ -1,11 +1,11 @@
 plugins {
-    alias(libs.plugins.android.application)
+    alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
 }
 
 android {
-    namespace = "com.sandy.cheeruplife"
+    namespace = "com.cheeruplife.core.designsystem"
     compileSdk = 35
 
     defaultConfig {
