@@ -2,6 +2,7 @@ package com.cheeruplife.core.designsystem.component
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.MarqueeSpacing
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -27,6 +28,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.cheeruplife.core.designsystem.common.Dimens
+import com.cheeruplife.core.designsystem.common.Margin
 import com.cheeruplife.core.designsystem.theme.CheerUpLifeTheme
 import com.cheeruplife.core.designsystem.theme.LifeGray
 import com.cheeruplife.core.designsystem.theme.LifeGray400
@@ -41,17 +44,17 @@ fun LifeOutlineDropDownButton(
 ) {
     OutlinedButton(
         modifier = modifier.defaultMinSize(
-            minHeight = 1.dp,
-            minWidth = 1.dp,
+            minHeight = Dimens.Size1,
+            minWidth = Dimens.Size1,
         ),
         onClick = onClick,
         border = BorderStroke(
-            width = 1.dp,
+            width = Dimens.Size1,
             color = LifeGray400,
         ),
         contentPadding = PaddingValues(
-            vertical = 4.dp,
-            horizontal = 10.dp,
+            vertical = Dimens.Margin4,
+            horizontal = Dimens.Margin10,
         ),
     ) {
         Text(
@@ -63,8 +66,8 @@ fun LifeOutlineDropDownButton(
         )
         Image(
             modifier = modifier.size(
-                    width = 16.dp,
-                    height = 8.dp,
+                    width = Dimens.Size16,
+                    height = Dimens.Size8,
                 ),
             imageVector = Icons.Rounded.KeyboardArrowDown,
             contentScale = ContentScale.FillWidth,
@@ -87,17 +90,17 @@ fun LifeOutlineClearButton(
     if(visible) {
         OutlinedButton(
             modifier = modifier.defaultMinSize(
-                minHeight = 1.dp,
-                minWidth = 1.dp
+                minHeight = Dimens.Size1,
+                minWidth = Dimens.Size1,
             ),
             onClick = onClick,
             border = BorderStroke(
-                width = 1.dp,
+                width = Dimens.Size1,
                 color = LifeGray400,
             ),
             contentPadding = PaddingValues(
-                vertical = 4.dp,
-                horizontal = 12.dp,
+                vertical = Dimens.Margin4,
+                horizontal = Dimens.Margin12,
             )
         ) {
             Text(
@@ -107,9 +110,9 @@ fun LifeOutlineClearButton(
                     fontWeight = FontWeight.Medium,
                 ),
             )
-            Spacer(modifier = modifier.width(2.dp))
+            Margin(width = Dimens.Margin2)
             Icon(
-                modifier = modifier.size(16.dp)
+                modifier = modifier.size(Dimens.Size16)
                     .clickable{
                         visible = false
                         onClear(true)
@@ -131,7 +134,7 @@ private fun PreviewOutlineButton() {
                 title = "Button 버튼타이틀",
                 onClick = {},
             )
-            Spacer(modifier = Modifier.height(8.dp))
+            Margin(height = Dimens.Margin8)
             LifeOutlineClearButton(
                 title = "Button 버튼타이틀",
                 onClick = {},
