@@ -16,7 +16,7 @@ appcompat = "1.7.0"
 coil = "2.7.0"
 kotlinxSerialization = "1.8.0"
 hilt = "2.54"
-kotlinxCoroutinesAndroid = "1.10.1"
+kotlinxCoroutines = "1.10.1"
 ksp = "2.0.21-1.0.27"
 
 [libraries]
@@ -59,7 +59,8 @@ hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.r
 hilt-core = { group = "com.google.dagger", name = "hilt-core", version.ref = "hilt" }
 
 # Coroutine
-kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutinesAndroid" }
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
+kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutines" }
 
 # inject
 javax-inject = { module = "javax.inject:javax.inject", version = "1" }
