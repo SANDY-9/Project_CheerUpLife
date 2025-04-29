@@ -18,11 +18,13 @@ fun NavController.navigateToHome(
 fun NavGraphBuilder.homeScreen(
     onClickNotification: () -> Unit = {},
     onClickCalendar: () -> Unit = {},
+    onClickSearch: () -> Unit = {},
 ) {
     composable<HomeRoute> {
         HomeRoute(
             onClickNotification = onClickNotification,
             onClickCalendar = onClickCalendar,
+            onClickSearch = onClickSearch,
         )
     }
 }

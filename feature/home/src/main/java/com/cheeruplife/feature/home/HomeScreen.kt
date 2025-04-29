@@ -12,11 +12,13 @@ import com.cheeruplife.feature.home.components.HomeTitleBar
 internal fun HomeRoute(
     onClickNotification: () -> Unit,
     onClickCalendar: () -> Unit,
+    onClickSearch: () -> Unit,
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
     HomeScreen(
         onClickNotification = onClickNotification,
         onClickCalendar = onClickCalendar,
+        onClickSearch = onClickSearch,
     )
 }
 
@@ -24,6 +26,7 @@ internal fun HomeRoute(
 internal fun HomeScreen(
     onClickNotification: () -> Unit,
     onClickCalendar: () -> Unit,
+    onClickSearch: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     LazyColumn(
@@ -33,6 +36,7 @@ internal fun HomeScreen(
             HomeTitleBar(
                 onClickNotification = onClickNotification,
                 onClickCalendar = onClickCalendar,
+                onClickSearch = onClickSearch,
             )
         }
     }
@@ -44,5 +48,6 @@ private fun PreviewHomeScreen() {
     HomeScreen(
         onClickNotification = {},
         onClickCalendar = {},
+        onClickSearch = {},
     )
 }
