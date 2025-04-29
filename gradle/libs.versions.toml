@@ -13,7 +13,7 @@ lifecycleVersion = "2.8.7"
 androidxHiltNavigationCompose = "1.2.0"
 navigationCompose = "2.8.9"
 appcompat = "1.7.0"
-coil = "2.7.0"
+coil = "3.1.0"
 kotlinxSerialization = "1.8.0"
 hilt = "2.54"
 kotlinxCoroutines = "1.10.1"
@@ -48,7 +48,8 @@ androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navig
 androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 
 # coil
-coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
+coil-compose = { group = "io.coil-kt.coil3", name = "coil-compose", version.ref = "coil" }
+coil-network-okhttp = { group = "io.coil-kt.coil3", name = "coil-network-okhttp", version.ref = "coil" }
 
 # kotlin serialization
 kotlinx-serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
@@ -86,6 +87,7 @@ compose = [
     "androidx-hilt-navigation-compose",
     "androidx-ui-tooling-preview",
     "coil-compose",
+    "coil-network-okhttp",
 ]
 androidTest = [
     "androidx-junit",
