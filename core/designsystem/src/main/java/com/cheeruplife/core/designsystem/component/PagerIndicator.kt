@@ -30,7 +30,7 @@ fun LifePagerIndicator(
             ),
             shape = RoundSquare.Large
         ).padding(
-            horizontal = Dimens.Margin16,
+            horizontal = Dimens.Margin12,
             vertical = Dimens.Margin4,
         ),
         verticalAlignment = Alignment.CenterVertically,

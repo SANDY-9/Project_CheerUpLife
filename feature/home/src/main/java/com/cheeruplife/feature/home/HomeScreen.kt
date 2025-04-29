@@ -9,6 +9,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.cheeruplife.core.designsystem.common.Dimens
 import com.cheeruplife.core.designsystem.common.Margin
 import com.cheeruplife.core.designsystem.theme.CheerUpLifeTheme
+import com.cheeruplife.feature.home.components.HomeBannerContent
 import com.cheeruplife.feature.home.components.HomeBookmarkContent
 import com.cheeruplife.feature.home.components.HomeTitleBar
 
@@ -20,6 +21,7 @@ internal fun HomeRoute(
     onBookmarkClick: () -> Unit,
     onBookmarkItemClick: (String) -> Unit,
     onBookmarkEmptyClick: () -> Unit,
+    onBannerItemClick: (String) -> Unit,
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
     HomeScreen(
@@ -29,6 +31,7 @@ internal fun HomeRoute(
         onBookmarkClick = onBookmarkClick,
         onBookmarkItemClick = onBookmarkItemClick,
         onBookmarkEmptyClick = onBookmarkEmptyClick,
+        onBannerItemClick = onBannerItemClick,
     )
 }
 
@@ -40,6 +43,7 @@ internal fun HomeScreen(
     onBookmarkClick: () -> Unit,
     onBookmarkItemClick: (String) -> Unit,
     onBookmarkEmptyClick: () -> Unit,
+    onBannerItemClick: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     LazyColumn(
@@ -61,6 +65,12 @@ internal fun HomeScreen(
             )
             Margin(height = Dimens.Margin30)
         }
+        item {
+            HomeBannerContent(
+                onBannerItemClick = onBannerItemClick,
+            )
+            Margin(height = Dimens.Margin30)
+        }
     }
 }
 
@@ -75,6 +85,7 @@ private fun PreviewHomeScreen() {
             onBookmarkClick = {},
             onBookmarkItemClick = {},
             onBookmarkEmptyClick = {},
+            onBannerItemClick = {},
         )
     }
 }

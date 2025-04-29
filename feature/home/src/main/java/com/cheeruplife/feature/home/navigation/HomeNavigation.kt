@@ -22,6 +22,7 @@ fun NavGraphBuilder.homeScreen(
     onBookmarkClick: () -> Unit = {},
     onBookmarkItemClick: (String) -> Unit = {},
     onBookmarkEmptyClick: () -> Unit = {},
+    onBannerItemClick: (String) -> Unit = {},
 ) {
     composable<HomeRoute> {
         HomeRoute(
@@ -31,6 +32,7 @@ fun NavGraphBuilder.homeScreen(
             onBookmarkClick = onBookmarkClick,
             onBookmarkItemClick = onBookmarkItemClick,
             onBookmarkEmptyClick = onBookmarkEmptyClick,
+            onBannerItemClick = onBannerItemClick,
         )
     }
 }
