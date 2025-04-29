@@ -19,12 +19,18 @@ fun NavGraphBuilder.homeScreen(
     onClickNotification: () -> Unit = {},
     onClickCalendar: () -> Unit = {},
     onClickSearch: () -> Unit = {},
+    onBookmarkClick: () -> Unit = {},
+    onBookmarkItemClick: (String) -> Unit = {},
+    onBookmarkEmptyClick: () -> Unit = {},
 ) {
     composable<HomeRoute> {
         HomeRoute(
             onClickNotification = onClickNotification,
             onClickCalendar = onClickCalendar,
             onClickSearch = onClickSearch,
+            onBookmarkClick = onBookmarkClick,
+            onBookmarkItemClick = onBookmarkItemClick,
+            onBookmarkEmptyClick = onBookmarkEmptyClick,
         )
     }
 }
