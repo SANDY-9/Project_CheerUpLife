@@ -10,7 +10,6 @@ import com.cheeruplife.core.designsystem.common.Dimens
 import com.cheeruplife.core.designsystem.common.Margin
 import com.cheeruplife.core.designsystem.theme.CheerUpLifeTheme
 import com.cheeruplife.feature.home.components.HomeBannerContent
-import com.cheeruplife.feature.home.components.HomeBookmarkContent
 import com.cheeruplife.feature.home.components.HomeTitleBar
 
 @Composable
@@ -18,9 +17,6 @@ internal fun HomeRoute(
     onClickNotification: () -> Unit,
     onClickCalendar: () -> Unit,
     onClickSearch: () -> Unit,
-    onBookmarkClick: () -> Unit,
-    onBookmarkItemClick: (String) -> Unit,
-    onBookmarkEmptyClick: () -> Unit,
     onBannerItemClick: (String) -> Unit,
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
@@ -28,9 +24,6 @@ internal fun HomeRoute(
         onClickNotification = onClickNotification,
         onClickCalendar = onClickCalendar,
         onClickSearch = onClickSearch,
-        onBookmarkClick = onBookmarkClick,
-        onBookmarkItemClick = onBookmarkItemClick,
-        onBookmarkEmptyClick = onBookmarkEmptyClick,
         onBannerItemClick = onBannerItemClick,
     )
 }
@@ -40,9 +33,6 @@ internal fun HomeScreen(
     onClickNotification: () -> Unit,
     onClickCalendar: () -> Unit,
     onClickSearch: () -> Unit,
-    onBookmarkClick: () -> Unit,
-    onBookmarkItemClick: (String) -> Unit,
-    onBookmarkEmptyClick: () -> Unit,
     onBannerItemClick: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -57,11 +47,6 @@ internal fun HomeScreen(
             )
         }
         item {
-            HomeBookmarkContent(
-                isBookmarkNotEmpty = true,
-                onBookmarkClick = onBookmarkClick,
-                onBookmarkItemClick = onBookmarkItemClick,
-                onBookmarkEmptyClick = onBookmarkEmptyClick,
             )
             Margin(height = Dimens.Margin30)
         }
@@ -82,9 +67,6 @@ private fun PreviewHomeScreen() {
             onClickNotification = {},
             onClickCalendar = {},
             onClickSearch = {},
-            onBookmarkClick = {},
-            onBookmarkItemClick = {},
-            onBookmarkEmptyClick = {},
             onBannerItemClick = {},
         )
     }
