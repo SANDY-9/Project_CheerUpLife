@@ -1,7 +1,5 @@
 package com.cheeruplife.core.designsystem.component
 
-import androidx.compose.foundation.gestures.PressGestureScope
-import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Text
@@ -11,9 +9,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.layout.LayoutCoordinates
+import androidx.compose.ui.layout.boundsInParent
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import com.cheeruplife.core.designsystem.common.Dimens
@@ -29,26 +30,30 @@ fun LifeTextButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    var targetBounds by remember { mutableStateOf<Rect?>(null) }
+    val measureEvent = remember {
+        { coordinates: LayoutCoordinates -> targetBounds = coordinates.boundsInParent() }
+    }
     var color: Color by remember { mutableStateOf(LifeRed) }
-    val pressEvent: PressGestureScope.(Offset) -> Unit = remember {
-        { color = LifeGray700 }
-    }
-    val tapEvent = remember {
-        { _: Offset ->
-            color = LifeRed
-            onClick()
-        }
-    }
+
     Box(
         modifier = modifier.pointerInput(Unit) {
-            detectTapGestures(
-                onPress = pressEvent,
-                onTap = tapEvent,
-            )
-        }
-        ,
+            awaitPointerEventScope {
+                while (true) {
+                    val change = awaitPointerEvent().changes.first()
+                    val isNotOutsideTouch = targetBounds?.contains(change.position) ?: false
+                    color = when {
+                        isNotOutsideTouch -> if(change.pressed) LifeGray700 else LifeRed.also {
+                            onClick()
+                        }
+                        else -> LifeRed
+                    }
+                }
+            }
+        },
     ) {
         Text(
+            modifier = modifier.onGloballyPositioned(onGloballyPositioned = measureEvent),
             text = title,
             style = Typography.bodyMedium.copy(
                 color = color,
