@@ -52,9 +52,9 @@ private fun Title() {
 
 @Composable
 private fun buildAnnotatedBannerTitle(): AnnotatedString {
-    val title1 = stringResource(R.string.home_banner_title1)
-    val title2 = stringResource(R.string.home_banner_title2)
-    val title3 = stringResource(R.string.home_banner_title3)
+    val title1 = stringResource(R.string.home_information_title1)
+    val title2 = stringResource(R.string.home_information_title2)
+    val title3 = stringResource(R.string.home_information_title3)
     return remember {
         buildAnnotatedString {
             append("$title1 ")

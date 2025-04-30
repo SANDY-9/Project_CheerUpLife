@@ -7,9 +7,11 @@
     <string name="home_schedule_empty">등록한 일정이 없습니다.</string>
     <string name="home_schedule_add">+ 일정 추가</string>
 
-    <string name="home_banner_title1">알아두면 유용한</string>
-    <string name="home_banner_title2">취UP</string>
-    <string name="home_banner_title3">정보</string>
+    <string name="home_information_title1">알아두면 유용한</string>
+    <string name="home_information_title2">취UP</string>
+    <string name="home_information_title3">정보</string>
+    <string name="home_information_banner_work24">채용정보</string>
+    <string name="home_information_banner_seoul">일자리포털</string>
 
     <string name="home_seoul_title">서울시 청년정책</string>
     <string name="home_seoul_more">더보기</string>
