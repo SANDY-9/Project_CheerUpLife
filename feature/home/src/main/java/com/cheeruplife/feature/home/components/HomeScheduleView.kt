@@ -27,7 +27,7 @@ import com.cheeruplife.feature.home.components.schedule.EmptyScheduleCard
 import com.cheeruplife.feature.home.components.schedule.ScheduleListCard
 
 @Composable
-internal fun HomeScheduleContent(
+internal fun HomeScheduleView(
     onScheduleClick: () -> Unit,
     onDayOfWeekSelect: (Int) -> Unit,
     onScheduleItemClick: () -> Unit,
@@ -112,10 +112,10 @@ private fun Content(
     }
 }
 
-@Preview(name = "HomeScheduleContent")
+@Preview(name = "HomeScheduleView")
 @Composable
-private fun PreviewHomeScheduleContent() {
-    HomeScheduleContent(
+private fun PreviewHomeScheduleView() {
+    HomeScheduleView(
         onScheduleClick = {},
         onDayOfWeekSelect = {},
         onScheduleItemClick = {},

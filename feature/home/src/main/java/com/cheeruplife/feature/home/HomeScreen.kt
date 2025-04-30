@@ -11,6 +11,7 @@ import com.cheeruplife.core.designsystem.common.Margin
 import com.cheeruplife.core.designsystem.theme.CheerUpLifeTheme
 import com.cheeruplife.feature.home.components.HomeBannerContent
 import com.cheeruplife.feature.home.components.HomeScheduleContent
+import com.cheeruplife.feature.home.components.HomeScheduleView
 import com.cheeruplife.feature.home.components.HomeTitleBar
 
 @Composable
@@ -56,7 +57,7 @@ internal fun HomeScreen(
             )
         }
         item {
-            HomeScheduleContent(
+            HomeScheduleView(
                 onScheduleClick = onScheduleClick,
                 onDayOfWeekSelect = onDayOfWeekSelect,
                 onScheduleItemClick = onScheduleItemClick,
