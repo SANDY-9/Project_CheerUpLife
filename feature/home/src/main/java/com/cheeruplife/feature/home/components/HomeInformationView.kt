@@ -20,6 +20,8 @@ import com.cheeruplife.core.designsystem.theme.LifeRed
 import com.cheeruplife.core.designsystem.theme.Typography
 import com.cheeruplife.feature.home.R
 import com.cheeruplife.feature.home.components.information.BannerPager
+import com.cheeruplife.feature.home.components.information.InformationMenu
+
 @Composable
 internal fun HomeInformationView(
     onBannerItemClick: (String) -> Unit,
@@ -72,6 +74,7 @@ private fun buildAnnotatedBannerTitle(): AnnotatedString {
 private fun Content(
     onBannerItemClick: (String) -> Unit,
     onMenuClick: (String) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     Column(
         modifier = modifier.fillMaxWidth(),
@@ -80,6 +83,10 @@ private fun Content(
             onBannerItemClick = onBannerItemClick,
         )
         Margin(height = Dimens.Margin12)
+        InformationMenu(
+            onMenuClick = onMenuClick,
+        )
+    }
 }
 
 @Preview(name = "HomeInformationView")
@@ -89,5 +96,6 @@ private fun PreviewHomeInformationView() {
         HomeInformationView(
             onBannerItemClick = { },
             onInformationMenuClick = { },
+        )
     }
 }

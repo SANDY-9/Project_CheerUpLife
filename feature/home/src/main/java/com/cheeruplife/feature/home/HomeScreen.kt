@@ -12,7 +12,6 @@ import com.cheeruplife.core.designsystem.theme.CheerUpLifeTheme
 import com.cheeruplife.feature.home.components.HomeInformationView
 import com.cheeruplife.feature.home.components.HomeScheduleView
 import com.cheeruplife.feature.home.components.HomeTitleBar
-import com.cheeruplife.feature.home.model.InformationMenu
 
 @Composable
 internal fun HomeRoute(
@@ -22,6 +21,7 @@ internal fun HomeRoute(
     onScheduleClick: () -> Unit,
     onScheduleItemClick: () -> Unit,
     onBannerItemClick: (String) -> Unit,
+    onInformationMenuClick: (String) -> Unit,
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
     HomeScreen(
@@ -32,6 +32,7 @@ internal fun HomeRoute(
         onDayOfWeekSelect = { viewModel },
         onScheduleItemClick = onScheduleItemClick,
         onBannerItemClick = onBannerItemClick,
+        onInformationMenuClick = onInformationMenuClick,
     )
 }
 
@@ -68,6 +69,7 @@ internal fun HomeScreen(
         item {
             HomeInformationView(
                 onBannerItemClick = onBannerItemClick,
+                onInformationMenuClick = onInformationMenuClick,
             )
             Margin(height = Dimens.Margin30)
         }
@@ -86,6 +88,7 @@ private fun PreviewHomeScreen() {
             onScheduleItemClick = {},
             onDayOfWeekSelect = {},
             onBannerItemClick = {},
+            onInformationMenuClick = {},
         )
     }
 }
