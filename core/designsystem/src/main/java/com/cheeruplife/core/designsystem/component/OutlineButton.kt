@@ -34,11 +34,14 @@ import com.cheeruplife.core.designsystem.theme.Typography
 @Composable
 fun LifeOutLineButton(
     onClick: () -> Unit,
-    content: @Composable() (RowScope.() -> Unit),
+    content: @Composable (RowScope.() -> Unit),
     modifier: Modifier = Modifier,
 ) {
     OutlinedButton(
-        modifier = modifier,
+        modifier = modifier.defaultMinSize(
+            minHeight = Dimens.Size1,
+            minWidth = Dimens.Size1,
+        ),
         onClick = onClick,
         shape = RoundSquare.Regular,
         border = BorderStroke(
@@ -48,6 +51,9 @@ fun LifeOutLineButton(
         colors = ButtonDefaults.outlinedButtonColors(
             containerColor = Color.White,
             contentColor = LifeGray,
+        ),
+        contentPadding = PaddingValues(
+            vertical = Dimens.Margin4,
         ),
         content = content,
     )
@@ -60,7 +66,10 @@ fun LifeOutLineButton(
     modifier: Modifier = Modifier,
 ) {
     OutlinedButton(
-        modifier = modifier,
+        modifier = modifier.defaultMinSize(
+            minHeight = Dimens.Size1,
+            minWidth = Dimens.Size1,
+        ),
         onClick = onClick,
         shape = RoundSquare.Regular,
         border = BorderStroke(
@@ -70,6 +79,10 @@ fun LifeOutLineButton(
         colors = ButtonDefaults.outlinedButtonColors(
             containerColor = Color.White,
             contentColor = LifeGray,
+        ),
+        contentPadding = PaddingValues(
+            vertical = Dimens.Margin4,
+            horizontal = Dimens.Margin10,
         ),
     ) {
         Text(

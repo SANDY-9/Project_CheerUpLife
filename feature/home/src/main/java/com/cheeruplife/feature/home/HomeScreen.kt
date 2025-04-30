@@ -22,6 +22,8 @@ internal fun HomeRoute(
     onScheduleItemClick: () -> Unit,
     onBannerItemClick: (String) -> Unit,
     onInformationMenuClick: (String) -> Unit,
+    onWork24Click: () -> Unit,
+    onSeoulJobClick: () -> Unit,
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
     HomeScreen(
@@ -33,6 +35,8 @@ internal fun HomeRoute(
         onScheduleItemClick = onScheduleItemClick,
         onBannerItemClick = onBannerItemClick,
         onInformationMenuClick = onInformationMenuClick,
+        onWork24Click = onWork24Click,
+        onSeoulJobClick = onSeoulJobClick,
     )
 }
 
@@ -46,6 +50,8 @@ internal fun HomeScreen(
     onDayOfWeekSelect: (Int) -> Unit,
     onBannerItemClick: (String) -> Unit,
     onInformationMenuClick: (String) -> Unit,
+    onWork24Click: () -> Unit,
+    onSeoulJobClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     LazyColumn(
@@ -70,6 +76,8 @@ internal fun HomeScreen(
             HomeInformationView(
                 onBannerItemClick = onBannerItemClick,
                 onInformationMenuClick = onInformationMenuClick,
+                onWork24Click = onWork24Click,
+                onSeoulJobClick = onSeoulJobClick,
             )
             Margin(height = Dimens.Margin30)
         }
@@ -89,6 +97,8 @@ private fun PreviewHomeScreen() {
             onDayOfWeekSelect = {},
             onBannerItemClick = {},
             onInformationMenuClick = {},
+            onWork24Click = {},
+            onSeoulJobClick = {},
         )
     }
 }

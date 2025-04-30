@@ -22,3 +22,5 @@ val LifeGray200 = Color(0xFFe1e1e1)
 val LifeGray400 = Color(0xFFD7D7D7)
 val LifeGray500 = Color(0xFFcacaca)
 val LifeGray700 = Color(0xFF999999)
+
+val LifeNavy = Color(0xff242435)

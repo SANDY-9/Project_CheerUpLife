@@ -21,23 +21,26 @@ import com.cheeruplife.core.designsystem.theme.Typography
 import com.cheeruplife.feature.home.R
 import com.cheeruplife.feature.home.components.information.BannerPager
 import com.cheeruplife.feature.home.components.information.InformationMenu
+import com.cheeruplife.feature.home.components.information.LinkButtonList
 
 @Composable
 internal fun HomeInformationView(
     onBannerItemClick: (String) -> Unit,
     onInformationMenuClick: (String) -> Unit,
+    onWork24Click: () -> Unit,
+    onSeoulJobClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
-        modifier = modifier
-            .fillMaxWidth()
-            .defaultHorizontalMargin(),
+        modifier = modifier.fillMaxWidth().defaultHorizontalMargin(),
     ) {
         Title()
         Margin(height = Dimens.Margin12)
         Content(
             onBannerItemClick = onBannerItemClick,
             onMenuClick = onInformationMenuClick,
+            onWork24Click = onWork24Click,
+            onSeoulJobClick = onSeoulJobClick,
         )
     }
 }
@@ -74,6 +77,8 @@ private fun buildAnnotatedBannerTitle(): AnnotatedString {
 private fun Content(
     onBannerItemClick: (String) -> Unit,
     onMenuClick: (String) -> Unit,
+    onWork24Click: () -> Unit,
+    onSeoulJobClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -86,6 +91,11 @@ private fun Content(
         InformationMenu(
             onMenuClick = onMenuClick,
         )
+        Margin(height = Dimens.Margin16)
+        LinkButtonList(
+            onWork24Click = onWork24Click,
+            onSeoulJobClick = onSeoulJobClick,
+        )
     }
 }
 
@@ -96,6 +106,8 @@ private fun PreviewHomeInformationView() {
         HomeInformationView(
             onBannerItemClick = { },
             onInformationMenuClick = { },
+            onWork24Click = { },
+            onSeoulJobClick = { },
         )
     }
 }
