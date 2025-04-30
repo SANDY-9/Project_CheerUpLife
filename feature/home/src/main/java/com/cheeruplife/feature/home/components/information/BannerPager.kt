@@ -1,85 +1,29 @@
-package com.cheeruplife.feature.home.components
+package com.cheeruplife.feature.home.components.information
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.AnnotatedString
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import com.cheeruplife.core.designsystem.common.Dimens
-import com.cheeruplife.core.designsystem.common.Margin
 import com.cheeruplife.core.designsystem.common.RoundSquare
 import com.cheeruplife.core.designsystem.component.LifeAsyncImage
 import com.cheeruplife.core.designsystem.component.LifePagerIndicator
-import com.cheeruplife.core.designsystem.extension.defaultHorizontalMargin
-import com.cheeruplife.core.designsystem.theme.CheerUpLifeTheme
-import com.cheeruplife.core.designsystem.theme.LifeRed
-import com.cheeruplife.core.designsystem.theme.Typography
-import com.cheeruplife.feature.home.R
 
 @Composable
-internal fun HomeBannerContent(
+internal fun BannerPager(
     onBannerItemClick: (String) -> Unit,
     modifier: Modifier = Modifier,
     totalItemCount: Int = 5,
-) {
-    Column(
-        modifier = modifier
-            .fillMaxWidth()
-            .defaultHorizontalMargin(),
-    ) {
-        Text(
-            text = buildAnnotatedBannerTitle(),
-            style = Typography.titleLarge
-        )
-        Margin(height = Dimens.Margin12)
-        BannerPager(
-            totalItemCount = totalItemCount,
-            onBannerItemClick = onBannerItemClick,
-        )
-    }
-}
-
-@Composable
-private fun buildAnnotatedBannerTitle(): AnnotatedString {
-    val title1 = stringResource(R.string.home_banner_title1)
-    val title2 = stringResource(R.string.home_banner_title2)
-    val title3 = stringResource(R.string.home_banner_title3)
-    return remember {
-        buildAnnotatedString {
-            append("$title1 ")
-            withStyle(
-                style = SpanStyle(
-                    color = LifeRed,
-                )
-            ) {
-                append(title2)
-            }
-            append(" $title3")
-        }
-    }
-}
-
-@Composable
-private fun BannerPager(
-    totalItemCount: Int,
-    onBannerItemClick: (String) -> Unit,
-    modifier: Modifier = Modifier,
 ) {
     val totalPage = remember { totalItemCount }
     val pagerState = rememberPagerState(
@@ -88,7 +32,7 @@ private fun BannerPager(
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .height(Dimens.Size150)
+            .height(Dimens.Size165)
             .clip(RoundSquare.Medium),
     ) {
         HorizontalPager(
@@ -141,12 +85,8 @@ private fun BannerItem(
     }
 }
 
-@Preview(name = "HomeBannerContent")
+@Preview(name = "BannerPager")
 @Composable
-private fun PreviewHomeBannerContent() {
-    CheerUpLifeTheme {
-        HomeBannerContent(
-            onBannerItemClick = { },
-        )
-    }
+private fun PreviewBannerPager() {
+   // BannerPager()
 }

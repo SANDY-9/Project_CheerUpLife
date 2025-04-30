@@ -9,10 +9,10 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.cheeruplife.core.designsystem.common.Dimens
 import com.cheeruplife.core.designsystem.common.Margin
 import com.cheeruplife.core.designsystem.theme.CheerUpLifeTheme
-import com.cheeruplife.feature.home.components.HomeBannerContent
-import com.cheeruplife.feature.home.components.HomeScheduleContent
+import com.cheeruplife.feature.home.components.HomeInformationView
 import com.cheeruplife.feature.home.components.HomeScheduleView
 import com.cheeruplife.feature.home.components.HomeTitleBar
+import com.cheeruplife.feature.home.model.InformationMenu
 
 @Composable
 internal fun HomeRoute(
@@ -44,6 +44,7 @@ internal fun HomeScreen(
     onScheduleItemClick: () -> Unit,
     onDayOfWeekSelect: (Int) -> Unit,
     onBannerItemClick: (String) -> Unit,
+    onInformationMenuClick: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     LazyColumn(
@@ -65,7 +66,7 @@ internal fun HomeScreen(
             Margin(height = Dimens.Margin30)
         }
         item {
-            HomeBannerContent(
+            HomeInformationView(
                 onBannerItemClick = onBannerItemClick,
             )
             Margin(height = Dimens.Margin30)
