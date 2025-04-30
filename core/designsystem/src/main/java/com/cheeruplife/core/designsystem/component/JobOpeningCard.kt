@@ -31,7 +31,6 @@ import com.cheeruplife.core.designsystem.theme.LifeGray400
 fun LifeJobOpeningHorizontalCard(
     onItemClick: () -> Unit,
     modifier: Modifier = Modifier,
-    content: @Composable (ColumnScope.() -> Unit),
 ) {
     Column (
         modifier = modifier
@@ -52,8 +51,28 @@ fun LifeJobOpeningHorizontalCard(
                 vertical = Dimens.Margin12,
                 horizontal = Dimens.Margin16,
             ),
-        content = content,
-    )
+    ) {
+        Text(
+            text = "Life Job",
+            fontSize = 12.sp,
+        )
+        Text(
+            text = "Job Opening",
+            fontSize = 16.sp,
+        )
+        Text(
+            text = "Life Job Opening",
+            fontSize = 14.sp,
+        )
+        Text(
+            text = "Job Opening",
+            fontSize = 12.sp,
+        )
+        Text(
+            text = "Opening",
+            fontSize = 10.sp,
+        )
+    }
 }
 
 @Composable
@@ -100,28 +119,7 @@ private fun PreviewCard() {
                     items(5) {
                         LifeJobOpeningHorizontalCard(
                             onItemClick = {},
-                        ) {
-                            Text(
-                                text = "Life Job",
-                                fontSize = 12.sp,
-                            )
-                            Text(
-                                text = "Job Opening",
-                                fontSize = 16.sp,
-                            )
-                            Text(
-                                text = "Life Job Opening",
-                                fontSize = 14.sp,
-                            )
-                            Text(
-                                text = "Job Opening",
-                                fontSize = 12.sp,
-                            )
-                            Text(
-                                text = "Opening",
-                                fontSize = 10.sp,
-                            )
-                        }
+                        )
                     }
                 }
             }

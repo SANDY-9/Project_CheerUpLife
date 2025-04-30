@@ -24,7 +24,7 @@ fun CheerUpLifeTheme(
 ) {
     val colorScheme = CheerUpColorScheme
     CompositionLocalProvider(
-        LocalMinimumInteractiveComponentSize provides 1.dp
+        LocalMinimumInteractiveComponentSize provides 0.dp,
     ) {
         MaterialTheme(
             colorScheme = colorScheme,

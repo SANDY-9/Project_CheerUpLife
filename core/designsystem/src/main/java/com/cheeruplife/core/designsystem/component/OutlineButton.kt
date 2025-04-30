@@ -5,21 +5,19 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Clear
 import androidx.compose.material.icons.rounded.KeyboardArrowDown
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
@@ -35,23 +33,61 @@ import com.cheeruplife.core.designsystem.theme.Typography
 
 @Composable
 fun LifeOutLineButton(
-    title: String,
     onClick: () -> Unit,
+    content: @Composable (RowScope.() -> Unit),
     modifier: Modifier = Modifier,
 ) {
     OutlinedButton(
-        modifier = modifier,
+        modifier = modifier.defaultMinSize(
+            minHeight = Dimens.Size1,
+            minWidth = Dimens.Size1,
+        ),
         onClick = onClick,
         shape = RoundSquare.Regular,
         border = BorderStroke(
             width = Dimens.Size1,
             color = LifeGray400,
         ),
+        colors = ButtonDefaults.outlinedButtonColors(
+            containerColor = Color.White,
+            contentColor = LifeGray,
+        ),
+        contentPadding = PaddingValues(
+            vertical = Dimens.Margin4,
+        ),
+        content = content,
+    )
+}
+
+@Composable
+fun LifeOutLineButton(
+    title: String,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    OutlinedButton(
+        modifier = modifier.defaultMinSize(
+            minHeight = Dimens.Size1,
+            minWidth = Dimens.Size1,
+        ),
+        onClick = onClick,
+        shape = RoundSquare.Regular,
+        border = BorderStroke(
+            width = Dimens.Size1,
+            color = LifeGray400,
+        ),
+        colors = ButtonDefaults.outlinedButtonColors(
+            containerColor = Color.White,
+            contentColor = LifeGray,
+        ),
+        contentPadding = PaddingValues(
+            vertical = Dimens.Margin4,
+            horizontal = Dimens.Margin10,
+        ),
     ) {
         Text(
             text = title,
             style = Typography.bodyLarge.copy(
-                color = LifeGray,
                 fontWeight = FontWeight.Bold,
             ),
         )

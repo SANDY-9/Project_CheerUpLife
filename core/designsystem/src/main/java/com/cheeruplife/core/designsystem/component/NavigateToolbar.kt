@@ -22,6 +22,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import com.cheeruplife.core.designsystem.common.Dimens
+import com.cheeruplife.core.designsystem.extension.lifeToolbarHeight
 import com.cheeruplife.core.designsystem.theme.CheerUpLifeTheme
 import com.cheeruplife.core.designsystem.theme.LifeRed
 import com.cheeruplife.core.designsystem.theme.Typography
@@ -35,7 +36,7 @@ fun LifeNavigateToolbar(
     actions: @Composable (RowScope.() -> Unit) = {},
 ) {
     TopAppBar(
-        modifier = modifier.height(Dimens.Size56),
+        modifier = modifier.lifeToolbarHeight(),
         title = {
             Box(
                 modifier = modifier.fillMaxHeight(),
@@ -73,7 +74,7 @@ fun LifeNavigateToolbar(
     actions: @Composable (RowScope.() -> Unit) = {},
 ) {
     TopAppBar(
-        modifier = modifier.height(Dimens.Size56),
+        modifier = modifier.lifeToolbarHeight(),
         title = {
             Box(
                 modifier = modifier.fillMaxHeight(),
