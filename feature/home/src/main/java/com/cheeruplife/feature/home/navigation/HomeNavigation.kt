@@ -19,6 +19,8 @@ fun NavGraphBuilder.homeScreen(
     onClickNotification: () -> Unit = {},
     onClickCalendar: () -> Unit = {},
     onClickSearch: () -> Unit = {},
+    onScheduleClick: () -> Unit = {},
+    onScheduleItemClick: () -> Unit = {},
     onBannerItemClick: (String) -> Unit = {},
 ) {
     composable<HomeRoute> {
@@ -26,6 +28,8 @@ fun NavGraphBuilder.homeScreen(
             onClickNotification = onClickNotification,
             onClickCalendar = onClickCalendar,
             onClickSearch = onClickSearch,
+            onScheduleClick = onScheduleClick,
+            onScheduleItemClick = onScheduleItemClick,
             onBannerItemClick = onBannerItemClick,
         )
     }

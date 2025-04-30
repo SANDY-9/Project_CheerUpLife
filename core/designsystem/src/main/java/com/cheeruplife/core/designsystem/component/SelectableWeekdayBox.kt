@@ -12,6 +12,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Star
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -85,7 +88,6 @@ fun LifeSelectableWeekdayBox(
                 }
             }
         }
-        Margin(height = Dimens.Margin2)
         Row {
             repeat(weekday.size) { position ->
                 val isToday = remember { position == todayPosition }
@@ -105,8 +107,8 @@ private fun WeekdayDivider(
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .height(Dimens.Size16)
-            .padding(vertical = Dimens.Margin4)
+            .height(Dimens.Size24)
+            .padding(vertical = Dimens.Margin8)
             .background(
                 color = LifeGray100,
                 shape = RoundSquare.Small,
@@ -141,7 +143,6 @@ private fun WeekdayItem(
                 selected -> SelectedWeekdayText(day = day)
                 else -> UnselectedWeekdayText(day = day)
             }
-            Margin(height = Dimens.Margin2)
             when {
                 selected -> SelectedWeekdayCircle()
                 else -> UnselectedWeekdayCircle()
@@ -175,13 +176,18 @@ private fun UnselectedWeekdayText(
 private fun SelectedWeekdayCircle(
     modifier: Modifier = Modifier,
 ) {
-    Box(
+    /*Box(
         modifier = modifier
             .size(Dimens.Size16)
             .background(
                 color = LifeRed,
                 shape = CircleShape,
             )
+    )*/
+    Icon(
+        imageVector = Icons.Rounded.Star,
+        contentDescription = null,
+        tint = LifeRed,
     )
 }
 @Composable
@@ -189,18 +195,23 @@ private fun UnselectedWeekdayCircle(
     modifier: Modifier = Modifier,
 ) {
     Box(
-        modifier = modifier
-            .size(Dimens.Size16)
-            .background(
-                color = Color.White,
-                shape = CircleShape,
-            )
-            .border(
-                width = Dimens.Size1,
-                color = LifeGray400,
-                shape = CircleShape,
-            )
-    )
+        modifier = modifier.size(Dimens.Size24),
+        contentAlignment = Alignment.Center
+    ) {
+        Box(
+            modifier = modifier
+                .size(Dimens.Size16)
+                .background(
+                    color = Color.White,
+                    shape = CircleShape,
+                )
+                .border(
+                    width = Dimens.Size1,
+                    color = LifeGray400,
+                    shape = CircleShape,
+                )
+        )
+    }
 }
 
 @Composable

@@ -10,6 +10,7 @@ import com.cheeruplife.core.designsystem.common.Dimens
 import com.cheeruplife.core.designsystem.common.Margin
 import com.cheeruplife.core.designsystem.theme.CheerUpLifeTheme
 import com.cheeruplife.feature.home.components.HomeBannerContent
+import com.cheeruplife.feature.home.components.HomeScheduleContent
 import com.cheeruplife.feature.home.components.HomeTitleBar
 
 @Composable
@@ -17,6 +18,8 @@ internal fun HomeRoute(
     onClickNotification: () -> Unit,
     onClickCalendar: () -> Unit,
     onClickSearch: () -> Unit,
+    onScheduleClick: () -> Unit,
+    onScheduleItemClick: () -> Unit,
     onBannerItemClick: (String) -> Unit,
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
@@ -24,6 +27,9 @@ internal fun HomeRoute(
         onClickNotification = onClickNotification,
         onClickCalendar = onClickCalendar,
         onClickSearch = onClickSearch,
+        onScheduleClick = onScheduleClick,
+        onDayOfWeekSelect = { viewModel },
+        onScheduleItemClick = onScheduleItemClick,
         onBannerItemClick = onBannerItemClick,
     )
 }
@@ -33,6 +39,9 @@ internal fun HomeScreen(
     onClickNotification: () -> Unit,
     onClickCalendar: () -> Unit,
     onClickSearch: () -> Unit,
+    onScheduleClick: () -> Unit,
+    onScheduleItemClick: () -> Unit,
+    onDayOfWeekSelect: (Int) -> Unit,
     onBannerItemClick: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -47,6 +56,10 @@ internal fun HomeScreen(
             )
         }
         item {
+            HomeScheduleContent(
+                onScheduleClick = onScheduleClick,
+                onDayOfWeekSelect = onDayOfWeekSelect,
+                onScheduleItemClick = onScheduleItemClick,
             )
             Margin(height = Dimens.Margin30)
         }
@@ -67,6 +80,9 @@ private fun PreviewHomeScreen() {
             onClickNotification = {},
             onClickCalendar = {},
             onClickSearch = {},
+            onScheduleClick = {},
+            onScheduleItemClick = {},
+            onDayOfWeekSelect = {},
             onBannerItemClick = {},
         )
     }
