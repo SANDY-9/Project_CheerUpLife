@@ -9,6 +9,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.cheeruplife.core.designsystem.common.Dimens
 import com.cheeruplife.core.designsystem.common.Margin
 import com.cheeruplife.core.designsystem.theme.CheerUpLifeTheme
+import com.cheeruplife.feature.home.components.HomeBannerView
 import com.cheeruplife.feature.home.components.HomeInformationView
 import com.cheeruplife.feature.home.components.HomeScheduleView
 import com.cheeruplife.feature.home.components.HomeTitleBar
@@ -24,6 +25,7 @@ internal fun HomeRoute(
     onInformationMenuClick: (String) -> Unit,
     onWork24Click: () -> Unit,
     onSeoulJobClick: () -> Unit,
+    onBannerClick: () -> Unit,
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
     HomeScreen(
@@ -37,6 +39,7 @@ internal fun HomeRoute(
         onInformationMenuClick = onInformationMenuClick,
         onWork24Click = onWork24Click,
         onSeoulJobClick = onSeoulJobClick,
+        onBannerClick = onBannerClick,
     )
 }
 
@@ -52,6 +55,7 @@ internal fun HomeScreen(
     onInformationMenuClick: (String) -> Unit,
     onWork24Click: () -> Unit,
     onSeoulJobClick: () -> Unit,
+    onBannerClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     LazyColumn(
@@ -81,6 +85,12 @@ internal fun HomeScreen(
             )
             Margin(height = Dimens.Margin30)
         }
+        item {
+            HomeBannerView(
+                onBannerClick = onBannerClick,
+            )
+            Margin(height = Dimens.Margin30)
+        }
     }
 }
 
@@ -99,6 +109,7 @@ private fun PreviewHomeScreen() {
             onInformationMenuClick = {},
             onWork24Click = {},
             onSeoulJobClick = {},
+            onBannerClick = {},
         )
     }
 }
