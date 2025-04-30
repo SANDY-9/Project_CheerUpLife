@@ -11,6 +11,7 @@ import com.cheeruplife.core.designsystem.common.Margin
 import com.cheeruplife.core.designsystem.theme.CheerUpLifeTheme
 import com.cheeruplife.feature.home.components.HomeBannerView
 import com.cheeruplife.feature.home.components.HomeInformationView
+import com.cheeruplife.feature.home.components.HomeRecruitmentView
 import com.cheeruplife.feature.home.components.HomeScheduleView
 import com.cheeruplife.feature.home.components.HomeTitleBar
 
@@ -26,6 +27,8 @@ internal fun HomeRoute(
     onWork24Click: () -> Unit,
     onSeoulJobClick: () -> Unit,
     onBannerClick: () -> Unit,
+    onRecruitClick: () -> Unit,
+    onRecruitItemClick: (String) -> Unit,
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
     HomeScreen(
@@ -40,6 +43,8 @@ internal fun HomeRoute(
         onWork24Click = onWork24Click,
         onSeoulJobClick = onSeoulJobClick,
         onBannerClick = onBannerClick,
+        onRecruitClick = onRecruitClick,
+        onRecruitItemClick = onRecruitItemClick,
     )
 }
 
@@ -56,6 +61,8 @@ internal fun HomeScreen(
     onWork24Click: () -> Unit,
     onSeoulJobClick: () -> Unit,
     onBannerClick: () -> Unit,
+    onRecruitClick: () -> Unit,
+    onRecruitItemClick: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     LazyColumn(
@@ -89,7 +96,12 @@ internal fun HomeScreen(
             HomeBannerView(
                 onBannerClick = onBannerClick,
             )
-            Margin(height = Dimens.Margin30)
+        }
+        item {
+            HomeRecruitmentView(
+                onRecruitClick = onRecruitClick,
+                onRecruitItemClick = onRecruitItemClick,
+            )
         }
     }
 }
@@ -110,6 +122,8 @@ private fun PreviewHomeScreen() {
             onWork24Click = {},
             onSeoulJobClick = {},
             onBannerClick = {},
+            onRecruitClick = {},
+            onRecruitItemClick = {},
         )
     }
 }

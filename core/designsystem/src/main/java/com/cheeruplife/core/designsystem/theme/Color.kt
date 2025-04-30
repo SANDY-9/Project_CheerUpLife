@@ -17,6 +17,7 @@ val LifeYellow = Color(0xFFf6b93b)
 val LifeBlack = Color(0xFF171717)
 
 val LifeGray = Color(0xFF797979)
+val LifeGray50 = Color(0xfff8f7f7)
 val LifeGray100 = Color(0xFFf1f1f1)
 val LifeGray200 = Color(0xFFe1e1e1)
 val LifeGray400 = Color(0xFFD7D7D7)

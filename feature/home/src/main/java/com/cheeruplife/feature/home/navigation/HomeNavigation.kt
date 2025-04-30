@@ -26,6 +26,8 @@ fun NavGraphBuilder.homeScreen(
     onWork24Click: () -> Unit = {},
     onSeoulJobClick: () -> Unit = {},
     onBannerClick: () -> Unit = {},
+    onRecruitClick: () -> Unit = {},
+    onRecruitItemClick: (String) -> Unit = {},
 ) {
     composable<HomeRoute> {
         HomeRoute(
@@ -39,6 +41,8 @@ fun NavGraphBuilder.homeScreen(
             onWork24Click = onWork24Click,
             onSeoulJobClick = onSeoulJobClick,
             onBannerClick = onBannerClick,
+            onRecruitClick = onRecruitClick,
+            onRecruitItemClick = onRecruitItemClick,
         )
     }
 }
