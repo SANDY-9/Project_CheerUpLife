@@ -8,6 +8,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusManager
+import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -17,6 +18,7 @@ import com.cheeruplife.feature.search.R
 @Composable
 internal fun SearchTitleBar(
     focusManager: FocusManager,
+    focusRequester: FocusRequester,
     onNavigateBack: () -> Unit,
     onSearch: (String) -> Unit,
     modifier: Modifier = Modifier,
@@ -32,6 +34,7 @@ internal fun SearchTitleBar(
         modifier = modifier,
         query = query,
         focusManager = focusManager,
+        focusRequester = focusRequester,
         placeholder = stringResource(R.string.search_input_placeholder),
         onInputChange = inputChangeEvent,
         onSearch = searchEvent,
@@ -44,8 +47,10 @@ internal fun SearchTitleBar(
 @Composable
 private fun PreviewSearchToolbar() {
     val focusManager = LocalFocusManager.current
+    val focusRequester = remember { FocusRequester() }
     SearchTitleBar(
         focusManager = focusManager,
+        focusRequester = focusRequester,
         onNavigateBack = {},
         onSearch = {},
     )
