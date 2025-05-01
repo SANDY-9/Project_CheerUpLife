@@ -15,3 +15,7 @@ fun Modifier.defaultStartMargin(): Modifier {
 fun Modifier.defaultEndMargin(): Modifier {
     return this.padding(end = Dimens.Margin16)
 }
+
+fun Modifier.defaultVerticalMargin(): Modifier {
+    return this.padding(vertical = Dimens.Margin16)
+}

@@ -3,10 +3,12 @@ package com.cheeruplife.core.designsystem.component
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.defaultMinSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Clear
@@ -16,15 +18,20 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.cheeruplife.core.designsystem.common.Dimens
 import com.cheeruplife.core.designsystem.common.Margin
 import com.cheeruplife.core.designsystem.common.RoundSquare
+import com.cheeruplife.core.designsystem.extension.noRippleClickable
 import com.cheeruplife.core.designsystem.theme.CheerUpLifeTheme
 import com.cheeruplife.core.designsystem.theme.LifeGray
 import com.cheeruplife.core.designsystem.theme.LifeGray400
@@ -144,19 +151,22 @@ fun LifeOutlineClearButton(
     onClear: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    val clearEvent = remember {
+        { onClear() }
+    }
     OutlinedButton(
         modifier = modifier.defaultMinSize(
             minHeight = Dimens.Size1,
             minWidth = Dimens.Size1,
-        ),
+        ).height(Dimens.Size36),
         onClick = onClick,
         border = BorderStroke(
             width = Dimens.Size1,
             color = LifeGray400,
         ),
         contentPadding = PaddingValues(
-            vertical = Dimens.Margin4,
-            horizontal = Dimens.Margin12,
+            vertical = 0.dp,
+            horizontal = Dimens.Margin16,
         )
     ) {
         Text(
@@ -169,8 +179,8 @@ fun LifeOutlineClearButton(
         Margin(width = Dimens.Margin2)
         Icon(
             modifier = modifier.size(Dimens.Size16)
-                .clickable(
-                    onClick = onClear,
+                .noRippleClickable(
+                    onClick = clearEvent,
                 ),
             imageVector = Icons.Rounded.Clear,
             contentDescription = null,
