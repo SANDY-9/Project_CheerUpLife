@@ -17,10 +17,12 @@ fun NavController.navigateToRecruit(
 
 fun NavGraphBuilder.recruitScreen(
     onNavigateBack: () -> Unit = {},
+    onRecruitItemClick: (String) -> Unit = {},
 ) {
     composable<RecruitRoute> {
         RecruitRoute(
             onNavigateBack = onNavigateBack,
+            onRecruitItemClick = onRecruitItemClick,
         )
     }
 }
