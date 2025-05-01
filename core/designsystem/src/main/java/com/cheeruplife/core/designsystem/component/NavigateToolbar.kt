@@ -1,17 +1,17 @@
 package com.cheeruplife.core.designsystem.component
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
-import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material.icons.rounded.Star
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -27,80 +27,101 @@ import com.cheeruplife.core.designsystem.theme.CheerUpLifeTheme
 import com.cheeruplife.core.designsystem.theme.LifeRed
 import com.cheeruplife.core.designsystem.theme.Typography
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LifeNavigateToolbar(
+fun LifeNavigateNoTitleToolbar(
+    onNavigate: () -> Unit,
+    modifier: Modifier = Modifier,
+    actions: @Composable (RowScope.() -> Unit) = {},
+) {
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .lifeToolbarHeight(),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        IconButton(
+            modifier = modifier
+                .fillMaxHeight()
+                .width(Dimens.Margin48),
+            onClick = onNavigate,
+        ) {
+            Icon(
+                imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
+                contentDescription = null,
+            )
+        }
+        actions()
+    }
+}
+
+@Composable
+fun LifeNavigateTitleToolbar(
     title: String,
     onNavigate: () -> Unit,
     modifier: Modifier = Modifier,
     actions: @Composable (RowScope.() -> Unit) = {},
 ) {
-    TopAppBar(
-        modifier = modifier.lifeToolbarHeight(),
-        title = {
-            Box(
-                modifier = modifier.fillMaxHeight(),
-                contentAlignment = Alignment.CenterStart,
-            ) {
-                Text(
-                    text = title,
-                    style = Typography.titleLarge,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis,
-                )
-            }
-        },
-        navigationIcon = {
-            IconButton(
-                modifier = modifier.fillMaxHeight(),
-                onClick = onNavigate,
-            ) {
-                Icon(
-                    imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
-                    contentDescription = null,
-                )
-            }
-        },
-        actions = actions,
-    )
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .lifeToolbarHeight(),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        IconButton(
+            modifier = modifier
+                .fillMaxHeight()
+                .width(Dimens.Margin48),
+            onClick = onNavigate,
+        ) {
+            Icon(
+                imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
+                contentDescription = null,
+            )
+        }
+        Text(
+            modifier = modifier.weight(1f),
+            text = title,
+            style = Typography.titleLarge,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
+        )
+        actions()
+    }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LifeNavigateToolbar(
+fun LifeNavigateAnnotatedTitleToolbar(
     title: AnnotatedString,
     onNavigate: () -> Unit,
     modifier: Modifier = Modifier,
     actions: @Composable (RowScope.() -> Unit) = {},
 ) {
-    TopAppBar(
-        modifier = modifier.lifeToolbarHeight(),
-        title = {
-            Box(
-                modifier = modifier.fillMaxHeight(),
-                contentAlignment = Alignment.CenterStart,
-            ) {
-                Text(
-                    text = title,
-                    style = Typography.titleLarge,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis,
-                )
-            }
-        },
-        navigationIcon = {
-            IconButton(
-                modifier = modifier.fillMaxHeight(),
-                onClick = onNavigate,
-            ) {
-                Icon(
-                    imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
-                    contentDescription = null,
-                )
-            }
-        },
-        actions = actions,
-    )
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .lifeToolbarHeight(),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        IconButton(
+            modifier = modifier
+                .fillMaxHeight()
+                .width(Dimens.Margin48),
+            onClick = onNavigate,
+        ) {
+            Icon(
+                imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
+                contentDescription = null,
+            )
+        }
+        Text(
+            modifier = modifier.weight(1f),
+            text = title,
+            style = Typography.titleLarge,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
+        )
+        actions()
+    }
 }
 
 @Preview(name = "Toolbar")
@@ -115,11 +136,26 @@ private fun PreviewToolbar() {
     }
     CheerUpLifeTheme {
         Column {
-            LifeNavigateToolbar(
+            LifeNavigateNoTitleToolbar(
+                onNavigate = {},
+            ) {
+                IconButton(
+                    onClick = {}
+                ) {
+                    Icon(
+                        imageVector = Icons.Rounded.Star,
+                        contentDescription = null,
+                    )
+                }
+                Text(
+                    text = "테스트 하고 있습니다."
+                )
+            }
+            LifeNavigateTitleToolbar(
                 title = "서울시 청년정책",
                 onNavigate = {},
             )
-            LifeNavigateToolbar(
+            LifeNavigateAnnotatedTitleToolbar(
                 title = annotatedString,
                 onNavigate = {},
             )
