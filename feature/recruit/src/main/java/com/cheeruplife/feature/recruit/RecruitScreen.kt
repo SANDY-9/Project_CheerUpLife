@@ -7,20 +7,24 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.cheeruplife.feature.recruit.components.RecruitHeader
+import com.cheeruplife.feature.recruit.components.RecruitList
 import com.cheeruplife.feature.recruit.components.RecruitToolbar
 
 @Composable
 internal fun RecruitRoute(
     onNavigateBack: () -> Unit,
+    onRecruitItemClick: (String) -> Unit,
 ) {
     RecruitScreen(
         onNavigateBack = {},
+        onRecruitItemClick = onRecruitItemClick,
     )
 }
 
 @Composable
 private fun RecruitScreen(
     onNavigateBack: () -> Unit,
+    onRecruitItemClick: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -35,6 +39,11 @@ private fun RecruitScreen(
             stickyHeader {
                 RecruitHeader()
             }
+            item {
+                RecruitList(
+                    onRecruitItemClick = onRecruitItemClick,
+                )
+            }
         }
     }
 }
@@ -42,8 +51,12 @@ private fun RecruitScreen(
 
 @Preview(name = "RecruitScreen")
 @Composable
-private fun PreviewRecruitScreen() {
+private fun PreviewRecruitScreen(
+    onNavigateBack: () -> Unit = {},
+    onRecruitItemClick: (String) -> Unit = {},
+) {
     RecruitScreen(
-        onNavigateBack = {},
+        onNavigateBack = onNavigateBack,
+        onRecruitItemClick = onRecruitItemClick,
     )
 }
