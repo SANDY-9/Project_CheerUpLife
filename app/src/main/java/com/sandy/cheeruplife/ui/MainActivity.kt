@@ -5,7 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import com.cheeruplife.core.designsystem.theme.CheerUpLifeTheme
-import com.cheeruplife.feature.search.navigation.SearchRoute
+import com.cheeruplife.feature.recruit.navigation.RecruitRoute
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -18,7 +18,7 @@ class MainActivity : ComponentActivity() {
             CheerUpLifeTheme {
                 CheerUpLifeMainApp(
                     appState = cheerUpLifeAppState,
-                    startDestination = SearchRoute,
+                    startDestination = RecruitRoute,
                 )
             }
         }
