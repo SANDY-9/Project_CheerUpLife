@@ -15,8 +15,12 @@ fun NavController.navigateToRecruit(
     navigate(route = RecruitRoute, navOptions)
 }
 
-fun NavGraphBuilder.recruitScreen() {
+fun NavGraphBuilder.recruitScreen(
+    onNavigateBack: () -> Unit = {},
+) {
     composable<RecruitRoute> {
-        RecruitRoute()
+        RecruitRoute(
+            onNavigateBack = onNavigateBack,
+        )
     }
 }
