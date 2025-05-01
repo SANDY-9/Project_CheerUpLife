@@ -46,6 +46,7 @@ object Dimens {
     val Size48 = 48.dp
     val Size54 = 54.dp
     val Size56 = 56.dp
+    val Size72 = 72.dp
     val Size112 = 112.dp
     val Size165 = 165.dp
 

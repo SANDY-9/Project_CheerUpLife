@@ -1,26 +1,22 @@
 plugins {
-    alias(libs.plugins.android.application)
+    alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-    alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
-    namespace = "com.sandy.cheeruplife"
+    namespace = "com.cheeruplife.feature.recruit"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.sandy.cheeruplife"
         minSdk = 28
-        targetSdk = 35
-        versionCode = 1
-        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
     }
-
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -44,24 +40,32 @@ android {
 
 dependencies {
 
+    implementation(project(":core:model"))
+    implementation(project(":core:domain"))
+    implementation(project(":core:data"))
     implementation(project(":core:designsystem"))
-    implementation(project(":feature:home"))
-    implementation(project(":feature:search"))
-    implementation(project(":feature:recruit"))
+    implementation(project(":core:resources"))
 
+    // ui
     implementation(libs.bundles.androidx)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.bundles.compose)
 
+    // hilt
+    implementation(libs.bundles.hilt)
+    ksp(libs.hilt.compiler)
+
+    // kotlin serialization
+    implementation(libs.kotlinx.serialization)
+
+    // coroutines
+    implementation(libs.kotlinx.coroutines.android)
+
+    // test
     testImplementation(libs.junit)
     androidTestImplementation(libs.bundles.androidTest)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
-    implementation(libs.kotlinx.serialization)
-
-    // hilt
-    implementation(libs.bundles.hilt)
-    ksp(libs.hilt.compiler)
 }
