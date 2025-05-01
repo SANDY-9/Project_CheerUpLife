@@ -23,6 +23,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusManager
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
@@ -60,6 +61,9 @@ fun LifeSearchTextField(
             }
         }
     }
+    val clearEvent = remember {
+        { _: Offset -> onInputChange("") }
+    }
     TextField(
         modifier = modifier
             .fillMaxSize()
@@ -82,22 +86,20 @@ fun LifeSearchTextField(
         },
         trailingIcon = {
             Box(
-                modifier = modifier.background(
+                modifier = Modifier.background(
                     color = LifeGray500,
                     shape = CircleShape,
                 ).size(
                     Dimens.Size20
                 ).pointerInput(Unit) {
                     detectTapGestures(
-                        onTap = {
-                            onInputChange("")
-                        }
+                        onTap = clearEvent,
                     )
                 },
                 contentAlignment = Alignment.Center,
             ) {
                 Icon(
-                    modifier = modifier.size(
+                    modifier = Modifier.size(
                         Dimens.Size18
                     ),
                     imageVector = Icons.Rounded.Close,
@@ -121,25 +123,16 @@ private const val QUERY_EMPTY_MESSAGE = "검색어를 입력해주세요."
 @Preview(name = "TextInputField")
 @Composable
 private fun PreviewTextInputField() {
-
     val focusManager = LocalFocusManager.current
     var input by remember { mutableStateOf("") }
 
     CheerUpLifeTheme {
-        LifeNavigateToolbar(
-            title = "",
-            onNavigate = {},
-        ) {
-            Margin(width = Dimens.Margin32)
-            LifeSearchTextField(
-                query = input,
-                placeholder = "검색어를 입력해주세요",
-                focusManager = focusManager,
-                onInputChange = remember {
-                    { query -> input = query }
-                },
-                onSearch = {},
-            )
-        }
+        LifeSearchTextField(
+            query = input,
+            placeholder = "검색어를 입력해주세요",
+            focusManager = focusManager,
+            onInputChange = { input = it },
+            onSearch = {},
+        )
     }
 }
