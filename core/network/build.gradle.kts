@@ -30,6 +30,11 @@ android {
             name = "WORK24_AUTH_KEY_REQRUIT",
             value = localProperties["authKey_reqruit"].toString()
         )
+        buildConfigField(
+            type = "String",
+            name = "WORK24_AUTH_KEY_EVENT",
+            value = localProperties["authKey_event"].toString()
+        )
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
