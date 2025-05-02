@@ -1,6 +1,7 @@
 package com.cheeruplife.core.network.di
 
 import com.cheeruplife.core.data.BuildConfig
+import com.cheeruplife.core.network.retrofit.seoul.SeoulDataServiceApi
 import com.cheeruplife.core.network.retrofit.work24.Work24ServiceApi
 import com.cheeruplife.core.network.utils.MyXmlToJsonConverterFactory
 import com.cheeruplife.core.network.utils.SeoulDataInterceptor
@@ -129,13 +130,13 @@ internal object RetrofitModule {
     fun providesSeoulDataApi(
         @SeoulDataOkhttpClient okHttpClient: OkHttpClient,
         jsonConverterFactory: Converter.Factory
-    ): Work24ServiceApi {
+    ): SeoulDataServiceApi {
         return Retrofit.Builder()
             .client(okHttpClient)
             .addConverterFactory(jsonConverterFactory)
             .baseUrl(BuildConfig.SEOUL_BASE_URL)
             .build()
-            .create(Work24ServiceApi::class.java)
+            .create(SeoulDataServiceApi::class.java)
     }
 
 }
