@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.konan.properties.Properties
+
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
@@ -12,6 +14,22 @@ android {
 
     defaultConfig {
         minSdk = 28
+
+        val localProperties = Properties()
+        val localPropertiesFile = rootProject.file("local.properties")
+        if (localPropertiesFile.exists()) {
+            localPropertiesFile.inputStream().use { localProperties.load(it) }
+        }
+        buildConfigField(
+            type = "String",
+            name = "WORK24_BASE_URL",
+            value = localProperties["work24_base_url"].toString()
+        )
+        buildConfigField(
+            type = "String",
+            name = "WORK24_AUTH_KEY_REQRUIT",
+            value = localProperties["authKey_reqruit"].toString()
+        )
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
@@ -19,6 +37,9 @@ android {
     }
     kotlinOptions {
         jvmTarget = "11"
+    }
+    buildFeatures {
+        buildConfig = true
     }
 }
 
