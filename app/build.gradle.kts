@@ -48,6 +48,7 @@ dependencies {
     implementation(project(":feature:home"))
     implementation(project(":feature:search"))
     implementation(project(":feature:recruit"))
+    implementation(project(":feature:schedule"))
 
     implementation(libs.bundles.androidx)
     implementation(platform(libs.androidx.compose.bom))
