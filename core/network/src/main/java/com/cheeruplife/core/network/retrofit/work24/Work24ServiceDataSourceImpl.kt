@@ -1,9 +1,9 @@
 package com.cheeruplife.core.network.retrofit.work24
 
 import com.cheeruplife.core.data.BuildConfig
-import com.cheeruplife.core.network.model.EducationResponse
-import com.cheeruplife.core.network.model.EventResponse
-import com.cheeruplife.core.network.model.RecruitResponse
+import com.cheeruplife.core.network.model.work24.EducationResponse
+import com.cheeruplife.core.network.model.work24.EventResponse
+import com.cheeruplife.core.network.model.work24.RecruitResponse
 import javax.inject.Inject
 
 internal class Work24ServiceDataSourceImpl @Inject constructor(

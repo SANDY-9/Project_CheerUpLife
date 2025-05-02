@@ -101,8 +101,6 @@ internal object RetrofitModule {
         val url = it.request()
             .url
             .newBuilder()
-            .addPathSegment(BuildConfig.SEOUL_AUTH_KEY)
-            .addPathSegment("json")
             .build()
         val request = it.request()
             .newBuilder()
