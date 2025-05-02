@@ -18,7 +18,8 @@ kotlinxSerialization = "1.8.0"
 hilt = "2.54"
 kotlinxCoroutines = "1.10.1"
 ksp = "2.0.21-1.0.27"
-material = "1.10.0"
+retrofit = "2.11.0"
+okhttp = "4.12.0"
 
 [libraries]
 # test
@@ -66,7 +67,12 @@ kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutine
 
 # inject
 javax-inject = { module = "javax.inject:javax.inject", version = "1" }
-material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+
+# retrofit2
+retrofit-core = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+retrofit-kotlin-serialization = { group = "com.squareup.retrofit2", name = "converter-kotlinx-serialization", version.ref = "retrofit" }
+okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
+
 
 [bundles]
 androidx = [
@@ -97,6 +103,11 @@ androidTest = [
 hilt = [
     "hilt-android",
     "hilt-core",
+]
+retrofit = [
+    "retrofit-core",
+    "retrofit-kotlin-serialization",
+    "okhttp",
 ]
 
 [plugins]
