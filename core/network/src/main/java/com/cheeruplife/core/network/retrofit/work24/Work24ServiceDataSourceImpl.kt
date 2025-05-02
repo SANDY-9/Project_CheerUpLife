@@ -1,6 +1,7 @@
 package com.cheeruplife.core.network.retrofit.work24
 
 import com.cheeruplife.core.data.BuildConfig
+import com.cheeruplife.core.network.model.EducationResponse
 import com.cheeruplife.core.network.model.EventResponse
 import com.cheeruplife.core.network.model.RecruitResponse
 import javax.inject.Inject
@@ -44,6 +45,20 @@ internal class Work24ServiceDataSourceImpl @Inject constructor(
             srchBgnDt = srchBgnDt,
             srchEndDt = srchEndDt,
         ).dhsOpenEmpInfoList
+    }
+
+    override suspend fun getEducationList(
+        startPage: Int,
+        display: Int,
+        pgmStdt: String
+    ): EducationResponse.EmpPgmSchdInviteList {
+        val authKey = BuildConfig.WORK24_AUTH_KEY_EDUCATION
+        return api.getEducationList(
+            authKey = authKey,
+            startPage = startPage,
+            display = display,
+            srchBgnDt = pgmStdt,
+        ).empPgmSchdInviteList
     }
 
     companion object {
