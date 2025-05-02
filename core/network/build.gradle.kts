@@ -40,6 +40,17 @@ android {
             name = "WORK24_AUTH_KEY_EDUCATION",
             value = localProperties["authKey_education"].toString()
         )
+
+        buildConfigField(
+            type = "String",
+            name = "SEOUL_BASE_URL",
+            value = localProperties["seoul_base_url"].toString()
+        )
+        buildConfigField(
+            type = "String",
+            name = "SEOUL_AUTH_KEY",
+            value = localProperties["authKey_seoul"].toString()
+        )
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11

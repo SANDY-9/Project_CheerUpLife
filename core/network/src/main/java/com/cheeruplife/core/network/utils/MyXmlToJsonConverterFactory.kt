@@ -1,7 +1,6 @@
 package com.cheeruplife.core.network.utils
 
 import android.util.Xml
-import kotlinx.serialization.json.Json
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.ResponseBody
@@ -11,13 +10,12 @@ import org.json.JSONObject
 import org.xmlpull.v1.XmlPullParser
 import retrofit2.Converter
 import retrofit2.Retrofit
-import retrofit2.converter.kotlinx.serialization.asConverterFactory
 import java.io.StringReader
 import java.lang.reflect.Type
 import javax.inject.Inject
 
 class MyXmlToJsonConverterFactory @Inject constructor(
-    private val json: Json,
+    private val jsonConverterFactory: Converter.Factory,
     private val contentType: MediaType = "application/json".toMediaType(),
 ): Converter.Factory() {
 
@@ -78,7 +76,7 @@ class MyXmlToJsonConverterFactory @Inject constructor(
         annotations: Array<out Annotation>,
         retrofit: Retrofit
     ): Converter<ResponseBody, *>? {
-        val jsonConverter = json.asConverterFactory(contentType)
+        val jsonConverter = jsonConverterFactory
             .responseBodyConverter(type, annotations, retrofit) ?: return null
         return Converter<ResponseBody, Any> { body ->
             val xmlString = body.string()
