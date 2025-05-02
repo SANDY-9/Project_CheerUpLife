@@ -1,4 +1,4 @@
-package com.cheeruplife.core.network.model
+package com.cheeruplife.core.network.model.work24
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
