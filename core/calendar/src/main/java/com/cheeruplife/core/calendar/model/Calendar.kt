@@ -32,5 +32,12 @@ data class Calendar(
                     }
             )
         }
+
+        fun List<Week>.findWeekIndex(date: Date): Int {
+            val weekIndex = indexOfFirst { week ->
+                week.find { it == date } != null
+            }
+            return if(weekIndex == -1) 0 else weekIndex
+        }
     }
 }

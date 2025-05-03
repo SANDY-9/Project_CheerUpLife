@@ -3,9 +3,7 @@ package com.cheeruplife.core.calendar
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -20,26 +18,22 @@ import com.cheeruplife.core.model.Schedule
 
 @Composable
 fun LifeNormalScheduleCalendar(
+    selectDate: Date?,
     days: List<Week>,
     schedule: Map<Date, List<Schedule>>,
-    onDateSelect: (Date) -> Unit,
+    onDateSelect: (Date, Int) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    var selectDate by remember {
-        val today = days.flatten().find { it.isToday }
-        mutableStateOf(today)
-    }
-    val selectEvent = { date: Date ->
-        selectDate = date
-        onDateSelect(date)
-    }
     Column (
-        modifier = modifier.fillMaxWidth().fillMaxHeight(0.5f),
+        modifier = modifier.fillMaxSize(),
     ) {
-        days.forEach { week ->
+        days.forEachIndexed { weekIndex, days ->
+            val selectEvent = remember {
+                { date: Date -> onDateSelect(date, weekIndex) }
+            }
             WeekItem(
                 modifier = modifier.weight(1f),
-                week = week,
+                week = days,
                 schedule = schedule,
                 selectDate = selectDate,
                 onDateSelect = selectEvent,
@@ -103,13 +97,21 @@ private fun PreviewNormalScheduleCalendar() {
             ),
         ),
     )
+    var selectDate by remember {
+        val today = days.flatten().find { it.isToday }
+        mutableStateOf(today)
+    }
+    val selectEvent = { date: Date, index: Int ->
+        selectDate = date
+    }
     Box(
         modifier = Modifier.fillMaxSize(),
     ) {
         LifeNormalScheduleCalendar(
+            selectDate  = selectDate,
             days = days,
             schedule = schedule,
-            onDateSelect = {}
+            onDateSelect = selectEvent,
         )
     }
 }

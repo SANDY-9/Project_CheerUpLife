@@ -20,29 +20,25 @@ import com.cheeruplife.core.model.Schedule
 
 @Composable
 fun LifeExpandScheduleCalendar(
+    selectDate: Date?,
     days: List<Week>,
     schedule: Map<Date, List<Schedule>>,
-    onDateSelect: (Date) -> Unit,
+    onDateSelect: (Date, Int) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    var selectDate by remember {
-        val today = days.flatten().find { it.isToday }
-        mutableStateOf(today)
-    }
-    val selectEvent = { date: Date ->
-        selectDate = date
-        onDateSelect(date)
-    }
     Column (
         modifier = modifier.fillMaxSize(),
     ) {
-        days.forEach { week ->
+        days.forEachIndexed { weekIndex, days ->
+            val selectEvent = remember {
+                { date: Date -> onDateSelect(date, weekIndex) }
+            }
             Column(
                 modifier = modifier.weight(1f),
             ) {
                 HorizontalDivider(color = LifeGray200)
                 WeekItem(
-                    week = week,
+                    week = days,
                     schedule = schedule,
                     selectDate = selectDate,
                     onDateSelect = selectEvent,
@@ -106,9 +102,17 @@ private fun PreviewExpandCalendar() {
             ),
         ),
     )
+    var selectDate by remember {
+        val today = days.flatten().find { it.isToday }
+        mutableStateOf(today)
+    }
+    val selectEvent = { date: Date, week: Int ->
+        selectDate = date
+    }
     LifeExpandScheduleCalendar(
+        selectDate = selectDate,
         days = days,
         schedule = schedule,
-        onDateSelect = {},
+        onDateSelect = selectEvent,
     )
 }

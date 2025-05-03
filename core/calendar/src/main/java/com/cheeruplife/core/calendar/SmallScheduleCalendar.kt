@@ -3,9 +3,7 @@ package com.cheeruplife.core.calendar
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -19,21 +17,18 @@ import com.cheeruplife.core.model.Schedule
 
 @Composable
 fun LifeSmallScheduleCalendar(
+    weekIndex: Int,
+    selectDate: Date?,
     week: List<Date>,
     schedule: Map<Date, List<Schedule>>,
-    onDateSelect: (Date) -> Unit,
+    onDateSelect: (Date, Int) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    var selectDate by remember {
-        val today = week.find { it.isToday }
-        mutableStateOf(today)
-    }
-    val selectEvent = { date: Date ->
-        selectDate = date
-        onDateSelect(date)
+    val selectEvent = remember {
+        { date: Date -> onDateSelect(date, weekIndex) }
     }
     Column (
-        modifier = modifier.fillMaxWidth().fillMaxHeight(0.1f),
+        modifier = modifier.fillMaxSize(),
     ) {
         WeekItem(
             modifier = modifier.weight(1f),
@@ -100,13 +95,22 @@ private fun PreviewSmallScheduleCalendar() {
             ),
         ),
     )
+    var selectDate by remember {
+        val today = days.find { it.isToday }
+        mutableStateOf(today)
+    }
+    val selectEvent = { date: Date, index: Int ->
+        selectDate = date
+    }
     Box(
         modifier = Modifier.fillMaxSize(),
     ) {
         LifeSmallScheduleCalendar(
+            weekIndex = 1,
+            selectDate = selectDate,
             week = days,
             schedule = schedule,
-            onDateSelect = {},
+            onDateSelect = selectEvent,
         )
     }
 }
