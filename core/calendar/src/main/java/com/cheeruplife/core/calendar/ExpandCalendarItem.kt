@@ -75,8 +75,8 @@ internal fun LifeExpandCalendarItem(
         Margin(height = Dimens.Margin4)
         scheduleList.forEach { schedule ->
             when {
-                date.isHoliday -> HolidayItem(
-                    holiday = date.holiday,
+                schedule.isHolyDay -> HolidayItem(
+                    holiday = schedule.content,
                 )
                 schedule.isCompleted -> CompleteScheduleItem(
                     content = schedule.content,

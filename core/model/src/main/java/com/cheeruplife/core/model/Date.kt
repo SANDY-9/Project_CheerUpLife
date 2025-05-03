@@ -9,8 +9,6 @@ data class Date(
     val day: Int,
     val dayOfWeek: DayOfWeek,
     val isToday: Boolean = isToday(year, month, day),
-    val isHoliday: Boolean = false,
-    val holiday: String = "",
 ) {
     companion object {
         fun isToday(year: Int, month: Int, day: Int): Boolean {

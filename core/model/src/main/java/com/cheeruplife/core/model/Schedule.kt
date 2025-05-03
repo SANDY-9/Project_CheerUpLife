@@ -5,4 +5,5 @@ data class Schedule(
     val content: String,
     val isCompleted: Boolean = false,
     val priority: Int = 0,
+    val isHolyDay: Boolean = false,
 )
