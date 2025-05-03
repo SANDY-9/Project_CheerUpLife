@@ -11,6 +11,8 @@ val PurpleGrey40 = Color(0xFF625b71)
 val Pink40 = Color(0xFF7D5260)
 
 val LifeRed = Color(0xFFe54d62)
+val LifePureRed = Color(0xffc3001b)
+val LifePastelRed = Color(0xfff4b8c0)
 
 val LifeYellow = Color(0xFFf6b93b)
 
@@ -22,9 +24,11 @@ val LifeGray100 = Color(0xFFf1f1f1)
 val LifeGray200 = Color(0xFFe1e1e1)
 val LifeGray400 = Color(0xFFD7D7D7)
 val LifeGray500 = Color(0xFFcacaca)
+val LifeGray600 = Color(0xffb1b1b1)
 val LifeGray700 = Color(0xFF999999)
 val LifeGray900 = Color(0xFF777777)
 
 val LifeNavy = Color(0xff242435)
 
 val LifePastelBlue = Color(0xffeef3fa)
+val LifeBlue = Color(0xff006bff)

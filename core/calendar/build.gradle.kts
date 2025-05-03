@@ -26,6 +26,14 @@ android {
 dependencies {
     implementation(project(":core:resources"))
     implementation(project(":core:designsystem"))
+    implementation(project(":core:model"))
+
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.bundles.compose)
+
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.bundles.androidTest)
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    debugImplementation(libs.androidx.ui.tooling)
+    debugImplementation(libs.androidx.ui.test.manifest)
 }
