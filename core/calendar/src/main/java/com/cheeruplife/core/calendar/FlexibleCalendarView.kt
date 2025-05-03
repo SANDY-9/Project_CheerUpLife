@@ -20,6 +20,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.PointerInputChange
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.tooling.preview.Preview
+import com.cheeruplife.core.calendar.components.LifeCalendarHeader
+import com.cheeruplife.core.calendar.components.LifeExpandScheduleCalendar
+import com.cheeruplife.core.calendar.components.LifeNormalScheduleCalendar
+import com.cheeruplife.core.calendar.components.LifeSmallScheduleCalendar
 import com.cheeruplife.core.calendar.model.Calendar
 import com.cheeruplife.core.calendar.model.Calendar.Companion.findWeekIndex
 import com.cheeruplife.core.calendar.model.CalendarType

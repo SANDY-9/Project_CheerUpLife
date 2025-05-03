@@ -1,4 +1,4 @@
-package com.cheeruplife.core.calendar
+package com.cheeruplife.core.calendar.components
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row

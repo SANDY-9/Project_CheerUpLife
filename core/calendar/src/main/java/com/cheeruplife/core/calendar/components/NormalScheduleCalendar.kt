@@ -1,10 +1,9 @@
-package com.cheeruplife.core.calendar
+package com.cheeruplife.core.calendar.components
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -14,12 +13,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.cheeruplife.core.calendar.model.Calendar
 import com.cheeruplife.core.calendar.model.Week
-import com.cheeruplife.core.designsystem.theme.LifeGray200
 import com.cheeruplife.core.model.Date
 import com.cheeruplife.core.model.Schedule
 
 @Composable
-fun LifeExpandScheduleCalendar(
+fun LifeNormalScheduleCalendar(
     selectDate: Date?,
     days: List<Week>,
     schedule: Map<Date, List<Schedule>>,
@@ -33,17 +31,13 @@ fun LifeExpandScheduleCalendar(
             val selectEvent = remember {
                 { date: Date -> onDateSelect(date, weekIndex) }
             }
-            Column(
+            WeekItem(
                 modifier = modifier.weight(1f),
-            ) {
-                HorizontalDivider(color = LifeGray200)
-                WeekItem(
-                    week = days,
-                    schedule = schedule,
-                    selectDate = selectDate,
-                    onDateSelect = selectEvent,
-                )
-            }
+                week = days,
+                schedule = schedule,
+                selectDate = selectDate,
+                onDateSelect = selectEvent,
+            )
         }
     }
 }
@@ -57,10 +51,10 @@ private fun WeekItem(
     modifier: Modifier = Modifier,
 ) {
     Row(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxSize(),
     ) {
         week.forEach { date ->
-            LifeExpandCalendarItem(
+            LifeNormalCalendarItem (
                 modifier = modifier.weight(1f),
                 date = date,
                 scheduleList = schedule[date] ?: emptyList(),
@@ -71,15 +65,16 @@ private fun WeekItem(
     }
 }
 
-@Preview(name = "ExpandScheduleCalendar")
+@Preview(name = "NormalScheduleCalendar")
 @Composable
-private fun PreviewExpandCalendar() {
+private fun PreviewNormalScheduleCalendar() {
     val days = remember { Calendar.create(2025, 5).days }
     val schedule = mapOf(
         days[0][0] to listOf(
             Schedule(
                 date = days[0][0],
                 content = "기차표 예매해야함",
+                isHolyDay = true,
             ),
             Schedule(
                 date = days[0][0],
@@ -106,13 +101,17 @@ private fun PreviewExpandCalendar() {
         val today = days.flatten().find { it.isToday }
         mutableStateOf(today)
     }
-    val selectEvent = { date: Date, week: Int ->
+    val selectEvent = { date: Date, index: Int ->
         selectDate = date
     }
-    LifeExpandScheduleCalendar(
-        selectDate = selectDate,
-        days = days,
-        schedule = schedule,
-        onDateSelect = selectEvent,
-    )
+    Box(
+        modifier = Modifier.fillMaxSize(),
+    ) {
+        LifeNormalScheduleCalendar(
+            selectDate  = selectDate,
+            days = days,
+            schedule = schedule,
+            onDateSelect = selectEvent,
+        )
+    }
 }
