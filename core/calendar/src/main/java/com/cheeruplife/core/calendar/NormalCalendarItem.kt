@@ -91,7 +91,7 @@ private fun HolidayItem(
                 color = LifePastelRed,
                 shape = RoundSquare.Small,
             )
-            .height(Dimens.Size4),
+            .height(Dimens.Size8),
     )
 }
 
@@ -106,7 +106,7 @@ private fun ScheduleItem(
                 color = LifeGray200,
                 shape = RoundSquare.Small,
             )
-            .height(Dimens.Size4),
+            .height(Dimens.Size8),
     )
 }
 
@@ -121,7 +121,7 @@ private fun CompleteScheduleItem(
                 color = LifeRed,
                 shape = RoundSquare.Small,
             )
-            .height(Dimens.Size4),
+            .height(Dimens.Size8),
     )
 }
 
