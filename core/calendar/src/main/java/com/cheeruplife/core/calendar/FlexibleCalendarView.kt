@@ -3,10 +3,8 @@ package com.cheeruplife.core.calendar
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.gestures.detectVerticalDragGestures
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -20,7 +18,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.PointerInputChange
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.tooling.preview.Preview
-import com.cheeruplife.core.calendar.components.LifeCalendarHeader
 import com.cheeruplife.core.calendar.components.LifeExpandScheduleCalendar
 import com.cheeruplife.core.calendar.components.LifeNormalScheduleCalendar
 import com.cheeruplife.core.calendar.components.LifeSmallScheduleCalendar
@@ -80,42 +77,37 @@ fun LifeFlexibleCalendarView(
         }
     }
 
-    Column(
-        modifier = modifier.fillMaxWidth()
-    ) {
-        LifeCalendarHeader()
-        Box(
-            modifier = modifier
-                .animateContentSize()
-                .fillMaxHeight(targetFraction)
-                .pointerInput(Unit) {
-                    detectVerticalDragGestures(
-                        onVerticalDrag = dragEvent,
-                        onDragEnd = dragEndEvent,
-                    )
-                }
-        ) {
-            when(type) {
-                CalendarType.EXPANDED_CALENDAR -> LifeExpandScheduleCalendar(
-                    selectDate = selectDate,
-                    days = days,
-                    schedule = schedule,
-                    onDateSelect = onDateSelect,
-                )
-                CalendarType.NORMAL_CALENDAR -> LifeNormalScheduleCalendar(
-                    selectDate = selectDate,
-                    days = days,
-                    schedule = schedule,
-                    onDateSelect = onDateSelect,
-                )
-                CalendarType.SMALL_CALENDAR -> LifeSmallScheduleCalendar(
-                    weekIndex = selectDateWeekIndex,
-                    selectDate = selectDate,
-                    week = days[selectDateWeekIndex],
-                    schedule = schedule,
-                    onDateSelect = onDateSelect,
+    Box(
+        modifier = modifier
+            .animateContentSize()
+            .fillMaxHeight(targetFraction)
+            .pointerInput(Unit) {
+                detectVerticalDragGestures(
+                    onVerticalDrag = dragEvent,
+                    onDragEnd = dragEndEvent,
                 )
             }
+    ) {
+        when(type) {
+            CalendarType.EXPANDED_CALENDAR -> LifeExpandScheduleCalendar(
+                selectDate = selectDate,
+                days = days,
+                schedule = schedule,
+                onDateSelect = onDateSelect,
+            )
+            CalendarType.NORMAL_CALENDAR -> LifeNormalScheduleCalendar(
+                selectDate = selectDate,
+                days = days,
+                schedule = schedule,
+                onDateSelect = onDateSelect,
+            )
+            CalendarType.SMALL_CALENDAR -> LifeSmallScheduleCalendar(
+                weekIndex = selectDateWeekIndex,
+                selectDate = selectDate,
+                week = days[selectDateWeekIndex],
+                schedule = schedule,
+                onDateSelect = onDateSelect,
+            )
         }
     }
 }

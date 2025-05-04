@@ -1,4 +1,4 @@
-package com.cheeruplife.core.calendar.components
+package com.cheeruplife.core.calendar
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -20,7 +20,7 @@ import com.cheeruplife.core.model.enums.DayOfWeek
 private val dayOfWeekList = DayOfWeek.entries
 
 @Composable
-internal fun LifeCalendarHeader(
+fun LifeCalendarHeader(
     modifier: Modifier = Modifier,
     dayOfWeeks: List<DayOfWeek> = dayOfWeekList,
 ) {
