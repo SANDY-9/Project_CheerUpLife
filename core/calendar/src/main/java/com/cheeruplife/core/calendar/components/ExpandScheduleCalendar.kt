@@ -90,7 +90,6 @@ private fun PreviewExpandCalendar() {
             Schedule(
                 date = days[1][3],
                 content = "기차표 예매해야함",
-                isCompleted = true
             ),
             Schedule(
                 date = days[1][3],

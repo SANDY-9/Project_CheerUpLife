@@ -72,7 +72,6 @@ private fun PreviewSmallScheduleCalendar() {
             Schedule(
                 date = days[0],
                 content = "기차표 예매해야함",
-                isHolyDay = true,
             ),
             Schedule(
                 date = days[0],
@@ -83,7 +82,6 @@ private fun PreviewSmallScheduleCalendar() {
             Schedule(
                 date = days[1],
                 content = "기차표 예매해야함",
-                isCompleted = true,
             ),
             Schedule(
                 date = days[1],

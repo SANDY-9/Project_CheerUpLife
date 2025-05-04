@@ -29,6 +29,7 @@ import com.cheeruplife.core.designsystem.theme.LifeRed
 import com.cheeruplife.core.model.Date
 import com.cheeruplife.core.model.Schedule
 import com.cheeruplife.core.model.enums.DayOfWeek
+import com.cheeruplife.core.model.enums.ScheduleType
 
 @Composable
 internal fun LifeNormalCalendarItem(
@@ -69,10 +70,10 @@ internal fun LifeNormalCalendarItem(
         DateHeader(date = date)
         Margin(height = Dimens.Margin4)
         scheduleList.forEach { schedule ->
-            when {
-                schedule.isHolyDay -> HolidayItem()
-                schedule.isCompleted -> CompleteScheduleItem()
-                else -> ScheduleItem()
+            when(schedule.type) {
+                ScheduleType.HOLIDAY -> HolidayItem()
+                ScheduleType.NOT_COMPLETE-> CompleteScheduleItem()
+                ScheduleType.COMPLETE -> ScheduleItem()
             }
             Margin(height = Dimens.Margin2)
         }
@@ -148,12 +149,10 @@ private fun PreviewNormalCalendarItem() {
                 Schedule(
                     date = date,
                     content = "기차표 예매해야함",
-                    isHolyDay = true,
                 ),
                 Schedule(
                     date = date,
                     content = "기차표 예매해야함",
-                    isCompleted = true
                 ),
                 Schedule(
                     date = date,

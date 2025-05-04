@@ -34,6 +34,7 @@ import com.cheeruplife.core.designsystem.theme.Typography
 import com.cheeruplife.core.model.Date
 import com.cheeruplife.core.model.Schedule
 import com.cheeruplife.core.model.enums.DayOfWeek
+import com.cheeruplife.core.model.enums.ScheduleType
 
 @Composable
 internal fun LifeExpandCalendarItem(
@@ -74,14 +75,14 @@ internal fun LifeExpandCalendarItem(
         DateHeader(date = date)
         Margin(height = Dimens.Margin4)
         scheduleList.forEach { schedule ->
-            when {
-                schedule.isHolyDay -> HolidayItem(
+            when(schedule.type) {
+                ScheduleType.HOLIDAY -> HolidayItem(
                     holiday = schedule.content,
                 )
-                schedule.isCompleted -> CompleteScheduleItem(
+                ScheduleType.COMPLETE -> CompleteScheduleItem(
                     content = schedule.content,
                 )
-                else -> ScheduleItem(
+                ScheduleType.NOT_COMPLETE -> ScheduleItem(
                     content = schedule.content,
                 )
             }
@@ -196,7 +197,6 @@ private fun PreviewCalendarItem() {
                 Schedule(
                     date = date,
                     content = "기차표 예매해야함",
-                    isCompleted = true
                 ),
                 Schedule(
                     date = date,
