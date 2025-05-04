@@ -15,8 +15,12 @@ fun NavController.navigateToSchedule(
     navigate(route = ScheduleRoute, navOptions)
 }
 
-fun NavGraphBuilder.scheduleScreen() {
+fun NavGraphBuilder.scheduleScreen(
+    onNavigateBack: () -> Unit = {},
+) {
     composable<ScheduleRoute> {
-        ScheduleRoute()
+        ScheduleRoute(
+            onNavigateBack = onNavigateBack,
+        )
     }
 }
