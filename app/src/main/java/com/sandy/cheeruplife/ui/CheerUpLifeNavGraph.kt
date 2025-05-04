@@ -6,6 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import com.cheeruplife.feature.home.navigation.homeScreen
 import com.cheeruplife.feature.recruit.navigation.recruitScreen
+import com.cheeruplife.feature.schedule.navigation.scheduleScreen
 import com.cheeruplife.feature.search.navigation.searchScreen
 
 @Composable
@@ -22,5 +23,6 @@ internal fun CheerUpLifeNavGraph(
         homeScreen()
         searchScreen()
         recruitScreen()
+        scheduleScreen()
     }
 }
