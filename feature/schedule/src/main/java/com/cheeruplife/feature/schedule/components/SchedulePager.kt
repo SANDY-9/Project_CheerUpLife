@@ -2,7 +2,10 @@ package com.cheeruplife.feature.schedule.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -14,6 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.cheeruplife.core.calendar.LifeFlexibleCalendarView
 import com.cheeruplife.core.calendar.model.Calendar
 import com.cheeruplife.core.calendar.model.Calendar.Companion.findWeekIndex
+import com.cheeruplife.core.calendar.rememberFlexibleCalendarState
 import com.cheeruplife.core.designsystem.common.Dimens
 import com.cheeruplife.core.designsystem.common.Margin
 import com.cheeruplife.core.model.Date
@@ -69,20 +73,31 @@ internal fun SchedulePager(
         selectDate = date
         selectDateWeekIndex = index
     }
-    Column {
-        LifeFlexibleCalendarView(
-            modifier = modifier.padding(horizontal = Dimens.Margin4),
-            selectDate = selectDate,
-            selectDateWeekIndex = selectDateWeekIndex,
-            days = days,
-            schedule = schedule,
-            onDateSelect = selectEvent,
-        )
-        ScheduleList(
-            schedule = selectedSchedule,
-            onPositionChane = onPositionChane,
-            onCompleteChange = onCompleteChange,
-        )
+    val pagerState = rememberPagerState(
+        initialPage = Int.MAX_VALUE / 2,
+        pageCount = { Int.MAX_VALUE },
+    )
+    val calendarState = rememberFlexibleCalendarState()
+    HorizontalPager(
+        modifier = modifier.fillMaxSize(),
+        state = pagerState,
+    ) {
+        Column {
+            LifeFlexibleCalendarView(
+                modifier = modifier.padding(horizontal = Dimens.Margin4),
+                calendarState = calendarState,
+                selectDate = selectDate,
+                selectDateWeekIndex = selectDateWeekIndex,
+                days = days,
+                schedule = schedule,
+                onDateSelect = selectEvent,
+            )
+            ScheduleList(
+                schedule = selectedSchedule,
+                onPositionChane = onPositionChane,
+                onCompleteChange = onCompleteChange,
+            )
+        }
     }
 }
 
