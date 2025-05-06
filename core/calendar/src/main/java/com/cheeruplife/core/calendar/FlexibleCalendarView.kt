@@ -6,16 +6,12 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.pointer.PointerInputChange
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.tooling.preview.Preview
 import com.cheeruplife.core.calendar.components.LifeExpandScheduleCalendar
@@ -24,14 +20,13 @@ import com.cheeruplife.core.calendar.components.LifeSmallScheduleCalendar
 import com.cheeruplife.core.calendar.model.Calendar
 import com.cheeruplife.core.calendar.model.Calendar.Companion.findWeekIndex
 import com.cheeruplife.core.calendar.model.CalendarType
-import com.cheeruplife.core.calendar.model.ScrollState
 import com.cheeruplife.core.calendar.model.Week
 import com.cheeruplife.core.model.Date
 import com.cheeruplife.core.model.Schedule
-import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 fun LifeFlexibleCalendarView(
+    calendarState: FlexibleCalendarState,
     selectDate: Date?,
     selectDateWeekIndex: Int,
     days: List<Week>,
@@ -39,56 +34,18 @@ fun LifeFlexibleCalendarView(
     onDateSelect: (Date, Int) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    var type by remember { mutableStateOf(CalendarType.EXPANDED_CALENDAR) }
-    var targetFraction by remember { mutableFloatStateOf(1f) }
-    var scrollState by remember { mutableStateOf(ScrollState.NONE) }
-
-    LaunchedEffect(targetFraction) {
-        snapshotFlow { targetFraction }.collectLatest { fraction ->
-            type = when {
-                fraction > 0.5f -> CalendarType.EXPANDED_CALENDAR
-                fraction > 0.1f -> CalendarType.NORMAL_CALENDAR
-                else -> CalendarType.SMALL_CALENDAR
-            }
-        }
-    }
-
-    val dragEvent = remember {
-        { _:PointerInputChange, dragAmount: Float ->
-            if(dragAmount > 0 && targetFraction < 1f) {
-                targetFraction += 0.01f
-                scrollState = ScrollState.DOWN_SCROLL
-            }
-            if(dragAmount < 0 && targetFraction > 0.1f) {
-                targetFraction -= 0.01f
-                scrollState = ScrollState.UP_SCROLL
-            }
-        }
-    }
-    
-    val dragEndEvent = remember {
-        {
-            targetFraction = when {
-                targetFraction > 0.5f -> if(scrollState == ScrollState.UP_SCROLL) 0.5f else 1f
-                targetFraction > 0.1f -> if(scrollState == ScrollState.UP_SCROLL) 0.1f else 0.5f
-                else -> 0.1f
-            }
-            scrollState = ScrollState.NONE
-        }
-    }
-
     Box(
         modifier = modifier
             .animateContentSize()
-            .fillMaxHeight(targetFraction)
+            .fillMaxHeight(calendarState.fraction)
             .pointerInput(Unit) {
                 detectVerticalDragGestures(
-                    onVerticalDrag = dragEvent,
-                    onDragEnd = dragEndEvent,
+                    onVerticalDrag = calendarState::onVerticalDrag,
+                    onDragEnd = calendarState::onDragEnd,
                 )
             }
     ) {
-        when(type) {
+        when(calendarState.type) {
             CalendarType.EXPANDED_CALENDAR -> LifeExpandScheduleCalendar(
                 selectDate = selectDate,
                 days = days,
@@ -156,10 +113,12 @@ private fun PreviewFlexibleCalendarView() {
         selectDate = date
         selectDateWeekIndex = index
     }
+    val calendarState = rememberFlexibleCalendarState()
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
         LifeFlexibleCalendarView(
+            calendarState = calendarState,
             selectDate = selectDate,
             selectDateWeekIndex = selectDateWeekIndex,
             days = days,
