@@ -15,13 +15,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import com.cheeruplife.core.calendar.model.Calendar
 import com.cheeruplife.core.designsystem.common.Dimens
 import com.cheeruplife.core.designsystem.common.Margin
-import com.cheeruplife.core.designsystem.component.ScheduleCard
+import com.cheeruplife.core.designsystem.component.LifeTouchDetectContainer
 import com.cheeruplife.core.designsystem.dragdrop.LifeDragAndDropListView
 import com.cheeruplife.core.designsystem.extension.defaultHorizontalMargin
 import com.cheeruplife.core.designsystem.theme.LifeBlack
@@ -33,12 +34,16 @@ import com.cheeruplife.core.model.enums.ScheduleType
 import com.cheeruplife.core.resources.icons.MyIconPack
 import com.cheeruplife.core.resources.icons.myiconpack.EditCalendar
 import com.cheeruplife.feature.schedule.R
+import com.cheeruplife.feature.schedule.components.schedulecard.ScheduleItemCard
 
 @Composable
 internal fun ScheduleList(
     schedule: List<Schedule>,
     onPositionChane: (Int, Int) -> Unit,
     onCompleteChange: (Schedule, Boolean) -> Unit,
+    onEditClick: () -> Unit,
+    onRemoveClick: () -> Unit,
+    touchOffset: Offset?,
 ) {
     Column (
         modifier = Modifier.fillMaxSize()
@@ -59,13 +64,16 @@ internal fun ScheduleList(
                     modifier = modifier.fillMaxWidth(),
                     contentAlignment = Alignment.Center,
                 ) {
-                    ScheduleCard(
+                    ScheduleItemCard(
                         content = item.content,
                         isComplete = item.type == ScheduleType.COMPLETE,
                         isHoliday = item.type == ScheduleType.HOLIDAY,
                         onCompleteChange = { complete ->
                             onCompleteChange(item, complete)
                         },
+                        onEditClick = onEditClick,
+                        onRemoveClick = onRemoveClick,
+                        touchOffset = touchOffset,
                     )
                 }
             }
@@ -134,10 +142,20 @@ private fun PreviewScheduleList() {
             date = days[0][0],
             content = "기차표 예매해야함",
         ),
+        Schedule(
+            date = days[0][0],
+            content = "기차표 예매해야함",
+            type = ScheduleType.COMPLETE
+        ),
     )
-    ScheduleList(
-        schedule = schedule,
-        onPositionChane = { _:Int, _:Int -> },
-        onCompleteChange = { _:Schedule, _:Boolean -> },
-    )
+    LifeTouchDetectContainer { touchOffset ->
+        ScheduleList(
+            schedule = schedule,
+            onPositionChane = { _:Int, _:Int -> },
+            onCompleteChange = { _:Schedule, _:Boolean -> },
+            onEditClick = {},
+            onRemoveClick = {},
+            touchOffset = touchOffset,
+        )
+    }
 }

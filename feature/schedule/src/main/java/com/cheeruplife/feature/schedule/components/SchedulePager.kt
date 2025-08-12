@@ -84,7 +84,7 @@ internal fun SchedulePager(
     ) {
         Column {
             LifeFlexibleCalendarView(
-                modifier = modifier.padding(horizontal = Dimens.Margin4),
+                modifier = Modifier.padding(horizontal = Dimens.Margin4),
                 calendarState = calendarState,
                 selectDate = selectDate,
                 selectDateWeekIndex = selectDateWeekIndex,

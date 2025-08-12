@@ -10,8 +10,13 @@ import androidx.compose.foundation.text.KeyboardActionScope
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Add
+import androidx.compose.material.icons.rounded.AddCircle
 import androidx.compose.material.icons.rounded.Close
+import androidx.compose.material.icons.rounded.Edit
 import androidx.compose.material3.Icon
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
@@ -22,10 +27,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.FocusDirection
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.FocusState
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
@@ -38,8 +45,10 @@ import com.cheeruplife.core.designsystem.common.Dimens
 import com.cheeruplife.core.designsystem.extension.addFocusCleaner
 import com.cheeruplife.core.designsystem.extension.showToast
 import com.cheeruplife.core.designsystem.theme.CheerUpLifeTheme
+import com.cheeruplife.core.designsystem.theme.LifeGray100
 import com.cheeruplife.core.designsystem.theme.LifeGray500
 import com.cheeruplife.core.designsystem.theme.LifeGray700
+import com.cheeruplife.core.designsystem.theme.LifeRed
 import com.cheeruplife.core.designsystem.theme.Typography
 
 @Composable
@@ -126,6 +135,112 @@ fun LifeSearchTextField(
 }
 private const val QUERY_EMPTY_MESSAGE = "검색어를 입력하세요."
 
+@Composable
+fun LifeScheduleTextField(
+    query: String,
+    placeholder: String,
+    focusManager: FocusManager,
+    focusRequester: FocusRequester,
+    onInputChange: (String) -> Unit,
+    onDone: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    val context = LocalContext.current
+    val doneEvent: (KeyboardActionScope.() -> Unit) = remember {
+        {
+            if(query.isNotBlank()) {
+                focusManager.clearFocus()
+                onDone()
+            }
+            else {
+                context.showToast(TEXT_EMPTY_MESSAGE)
+            }
+        }
+    }
+    val clearEvent = remember {
+        { _: Offset ->
+            focusRequester.requestFocus()
+            onInputChange("")
+        }
+    }
+    var isFocused by remember { mutableStateOf(false) }
+    val focusChangeEvent = remember {
+        { focusState: FocusState ->
+            isFocused = focusState.isFocused
+        }
+    }
+    TextField(
+        modifier = modifier
+            .addFocusCleaner(focusManager)
+            .focusRequester(focusRequester)
+            .onFocusChanged(
+                onFocusChanged = focusChangeEvent,
+            ),
+        value = query,
+        onValueChange = onInputChange,
+        colors = TextFieldDefaults.colors(
+            focusedIndicatorColor = Color.Transparent,
+            unfocusedIndicatorColor = Color.Transparent,
+            focusedContainerColor = Color.Transparent,
+            unfocusedContainerColor = Color.Transparent,
+            focusedLeadingIconColor = LifeRed,
+            unfocusedTrailingIconColor = LifeGray500,
+            focusedTrailingIconColor = LifeGray500
+        ),
+        singleLine = true,
+        placeholder = {
+            Text(
+                text = placeholder,
+                style = Typography.bodyLarge,
+                color = LifeGray700,
+            )
+        },
+        leadingIcon = {
+            Icon(
+                modifier = Modifier.size(
+                    Dimens.Size18
+                ),
+                imageVector = Icons.Rounded.Edit,
+                contentDescription = null,
+            )
+        },
+        keyboardOptions = KeyboardOptions(
+            keyboardType = KeyboardType.Text,
+            imeAction = ImeAction.Done,
+        ),
+        keyboardActions = KeyboardActions(
+            onDone = doneEvent,
+        ),
+        trailingIcon = {
+            if(isFocused) {
+                Box(
+                    modifier = Modifier.background(
+                        color = LifeGray500,
+                        shape = CircleShape,
+                    ).size(
+                        Dimens.Size20
+                    ).pointerInput(Unit) {
+                        detectTapGestures(
+                            onTap = clearEvent,
+                        )
+                    },
+                    contentAlignment = Alignment.Center,
+                ) {
+                    Icon(
+                        modifier = Modifier.size(
+                            Dimens.Size18
+                        ),
+                        imageVector = Icons.Rounded.Close,
+                        contentDescription = null,
+                        tint = Color.White,
+                    )
+                }
+            }
+        },
+    )
+}
+private const val TEXT_EMPTY_MESSAGE = "내용을 입력하세요."
+
 @Preview(name = "TextInputField")
 @Composable
 private fun PreviewTextInputField() {
@@ -145,13 +260,13 @@ private fun PreviewTextInputField() {
                 onInputChange = { input1 = it },
                 onSearch = {},
             )
-            LifeSearchTextField(
+            LifeScheduleTextField(
                 query = input2,
-                placeholder = "검색어를 입력하세요",
+                placeholder = "내용을 입력하세요.",
                 focusManager = focusManager,
                 focusRequester = focusRequester2,
                 onInputChange = { input2 = it },
-                onSearch = {},
+                onDone = {},
             )
         }
     }

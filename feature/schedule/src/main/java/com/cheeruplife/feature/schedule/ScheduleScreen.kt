@@ -1,5 +1,6 @@
 package com.cheeruplife.feature.schedule
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -7,8 +8,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.cheeruplife.core.designsystem.common.Dimens
+import com.cheeruplife.core.designsystem.extension.defaultHorizontalMargin
+import com.cheeruplife.core.designsystem.extension.defaultVerticalMargin
 import com.cheeruplife.core.model.Schedule
 import com.cheeruplife.feature.schedule.components.ScheduleCalendarHeader
+import com.cheeruplife.feature.schedule.components.ScheduleInputButton
 import com.cheeruplife.feature.schedule.components.SchedulePager
 import com.cheeruplife.feature.schedule.components.ScheduleToolbar
 
@@ -37,10 +42,19 @@ private fun ScheduleScreen(
             onNavigateBack = onNavigateBack,
         )
         ScheduleCalendarHeader()
-        SchedulePager(
-            onPositionChane = onPositionChane,
-            onCompleteChange = onCompleteChange,
-        )
+        Box(
+            modifier = modifier.weight(1f),
+        ) {
+            SchedulePager(
+                onPositionChane = onPositionChane,
+                onCompleteChange = onCompleteChange,
+            )
+        }
+        Box(
+            modifier = modifier.padding(Dimens.Margin8),
+        ) {
+            ScheduleInputButton()
+        }
     }
 }
 
